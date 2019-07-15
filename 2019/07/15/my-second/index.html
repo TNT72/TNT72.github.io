@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>my-second - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="堆1. 定义优先队列(Priority Queue):特殊的“队列”，取出元素的顺序是 依照元素的优先权(关键字)大小，而不是元素进入队列的先后顺序2.堆的两个特性结构性:用数组表示的完全二叉树; ,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">my-second</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">my-second</h1>
+        <div class="stuff">
+            <span>七月 15, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><h3 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. 定义</h3><pre><code>优先队列(Priority Queue):特殊的“队列”，取出元素的顺序是 依照元素的优先权(关键字)大小，而不是元素进入队列的先后顺序</code></pre><h3 id="2-堆的两个特性"><a href="#2-堆的两个特性" class="headerlink" title="2.堆的两个特性"></a>2.堆的两个特性</h3><pre><code>结构性:用数组表示的完全二叉树; 
+ 有序性:任一结点的关键字是其子树所有结点的最大值(或最小值) 
+最大堆(MaxHeap)”,也称“大顶堆”:最大值 
+最小堆(MinHeap)”,也称“小顶堆” :最小值 </code></pre><h3 id="3-数据结构-完全二叉树"><a href="#3-数据结构-完全二叉树" class="headerlink" title="3.数据结构 : (完全二叉树)"></a>3.数据结构 : (完全二叉树)</h3><pre><code>因为是完全二叉树，所以可以使用数组来储存</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">typedef struct HeapStruct *MaxHeap;</span><br><span class="line">struct HeapStruct &#123; </span><br><span class="line">	ElementType *Elements; /* 存储堆元素的数组 */ </span><br><span class="line">	int Size; /* 堆的当前元素个数 */</span><br><span class="line">	int Capacity; /* 堆的最大容量 </span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>⚠️数组中的第一个元素不使用<br>⚠️数组中的第一个元素设为哨兵<br>        H-&gt;Element[ 0 ] 是哨兵元素，最大(小)堆中它不小于堆    中的最大(小)元素，控制顺环结束。 </p>
+<h3 id="4-堆的一些基本操作集"><a href="#4-堆的一些基本操作集" class="headerlink" title="4 .堆的一些基本操作集"></a>4 .堆的一些基本操作集</h3><ul>
+<li><p><code>MaxHeap Create( int MaxSize )</code>:创建一个空的最大堆。 </p>
+</li>
+<li><p><code>Boolean IsFull( MaxHeap H )</code>:判断最大堆H是否已满。</p>
+</li>
+<li><p><code>Insert( MaxHeap H, ElementType item )</code>:将元素item插入最大堆H。</p>
+</li>
+<li><p><code>Boolean IsEmpty( MaxHeap H )</code>:判断最大堆H是否为空。</p>
+</li>
+<li><p><code>ElementType DeleteMax( MaxHeap H )</code>:返回H中最大元素(高优先级)。</p>
+<ol>
+<li><h4 id="堆的创建初始化"><a href="#堆的创建初始化" class="headerlink" title="堆的创建初始化"></a><strong>堆的创建初始化</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">MaxHeap Create( int MaxSize )</span><br><span class="line">&#123;	/* 创建容量为MaxSize的空的最大堆 */</span><br><span class="line">	MaxHeap H = malloc( sizeof( struct HeapStruct ) );</span><br><span class="line">    H-&gt;Elements =       malloc( (MaxSize+1)*sizeof(ElementType)); </span><br><span class="line">	H-&gt;Size = 0;</span><br><span class="line">	H-&gt;Capacity = MaxSize;</span><br><span class="line">	H-&gt;Elements[0] = MaxData; </span><br><span class="line">	/* 定义“哨兵”为大于堆中所有可能元素的值，便于以后更快操作 */ </span><br><span class="line">	return H; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<ol start="2">
+<li><h4 id="堆的插入操作"><a href="#堆的插入操作" class="headerlink" title="堆的插入操作"></a><strong>堆的插入操作</strong></h4><pre><code>* 代码</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">void Insert( MaxHeap H, ElementType item )</span><br><span class="line">&#123; /* 将元素item 插入最大堆H，其中H-&gt;Elements[0]已经定义为哨兵*/ </span><br><span class="line">	int I;</span><br><span class="line">	if ( IsFull(H) ) &#123; </span><br><span class="line">		printf(“最大堆已满”); </span><br><span class="line">		return;</span><br><span class="line">	&#125; </span><br><span class="line">	i = ++H-&gt;Size; /*指向插入后堆中的~最后一个元素的位置*/ </span><br><span class="line">	for ( ; H-&gt;Elements[i/2] &lt; item; i/=2 ) 					    /*哨兵元素在这里起作用了哦，因为堆中所有元素都小于哨兵元素，所以限制了最大元素继续上移*/</span><br><span class="line">		H-&gt;Elements[I] = H-&gt;Elements[I/2]; /* 向下过滤结点 */ </span><br><span class="line">H-&gt;Elements[I] = item; /* 将item 插入 */ </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre><code>* 图解</code></pre><p><img src="https://img2018.cnblogs.com/blog/1369884/201901/1369884-20190109122139296-246426199.png" alt><br><img src="https://img2018.cnblogs.com/blog/1369884/201901/1369884-20190109122206355-1136378079.png" alt><br><img src="https://img2018.cnblogs.com/blog/1369884/201901/1369884-20190109122310871-1332773267.png" alt><br><img src="https://img2018.cnblogs.com/blog/1369884/201901/1369884-20190109122239121-378022300.png" alt></p>
+</li>
+<li><h4 id="堆的删除操作"><a href="#堆的删除操作" class="headerlink" title="堆的删除操作"></a><strong>堆的删除操作</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">ElementType DeleteMax( MaxHeap H ) </span><br><span class="line">&#123; /* 从最大堆H中取出键值为最大的元素，并删除一个结点 */ </span><br><span class="line">	int Parent, Child;</span><br><span class="line">	ElementType MaxItem, temp;</span><br><span class="line">	if ( IsEmpty(H) ) &#123; </span><br><span class="line">		printf(“最大堆已为空”); </span><br><span class="line">		return; </span><br><span class="line">	&#125; </span><br><span class="line">	MaxItem = H-&gt;Elements[1]; /* 取出根结点最大值 */</span><br><span class="line">	/* 用最大堆中最后一个元素从根结点开始向上过滤下层结点 */ </span><br><span class="line">	temp = H-&gt;Elements[H-&gt;Size—];</span><br><span class="line">	for( Parent=1; Parent*2&lt;=H-&gt;Size; Parent=Child ) &#123; </span><br><span class="line">      			Child = Parent * 2; //此时chlid指向右节点</span><br><span class="line">      			if( (Child!= H-&gt;Size) &amp;&amp;(H-&gt;Elements[Child] &lt; H-&gt;Elements[Child+1]) ) /* Child指向左右子结点的较大者 */ </span><br><span class="line">			Child++; </span><br><span class="line">		if( temp &gt;= H-&gt;Elements[Child] ) /*temp大于Child指向左右子结点的较大者*/</span><br><span class="line">			break; /*此时break出来表示此时的parent就是temp元素要放置的位置*/</span><br><span class="line">		else /* 移动temp元素到下一层 */ </span><br><span class="line">			H-&gt;Elements[Parent] = H-&gt;Elements[Child]; </span><br><span class="line">	&#125;</span><br><span class="line">	H-&gt;Elements[Parent] = temp; </span><br><span class="line">	return MaxItem; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre><code>⚠️理解:first弹出根结点元素，second将二叉树叶子结点的最右边的节点(即)放置到根结点的位置（不是真放），third将根结点与左右子节点中的最大节点比较，小于则将子节点上移。</code></pre></li>
+<li><h4 id="最大堆的建立"><a href="#最大堆的建立" class="headerlink" title="最大堆的建立"></a><strong>最大堆的建立</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> void create(MaxHeap H,int N)&#123;</span><br><span class="line">  	ElementType a;</span><br><span class="line">  	for(int I=0;i&lt;N;i++)&#123;</span><br><span class="line">	scanf(“%d”,&amp;a);</span><br><span class="line">	insert( H,a );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
