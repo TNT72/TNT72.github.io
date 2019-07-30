@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Archive: 2019/7</title>
+    <title>Linux脚本编程 - Hexo</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Fechin,"> 
-    
+    <meta name="description" content="about变量1.如果要给变量赋一个含有空格的字符串值，必须用单引号来界定字符串的首和尾2.如果要用到变量，使用$;如果要操作变量，不使用$，这条规则的一 个例外就是使用printenv显示某个变量,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -30,62 +30,73 @@
 <body class="loading">
     <span id="config-title" style="display:none">Hexo</span>
     <div id="loader"></div>
-    <div id="single" class="page">
-    <div id="top">
-        <a class="icon-left image-icon" href="javascript:history.back()"></a>
-    </div>
-    <div class="section">
-        <div class="article">
-            <div class="main">
-                <div class="content">
-                    <div class="timeline">
-                      <h2 class="timeline-title">归档: 6篇</h2>
-                      
-                        
-                          <h3 class="timeline-subtitle">2019</h3>
-                        
-                        <div class="timeline-item">
-                          <time>2019-07-30</time>
-                          <a target="_self" href="/2019/07/30/Linux脚本编程/">Linux脚本编程</a>
-                        </div>
-                      
-                        
-                        <div class="timeline-item">
-                          <time>2019-07-29</time>
-                          <a target="_self" href="/2019/07/29/Linux命令/">Linux命令</a>
-                        </div>
-                      
-                        
-                        <div class="timeline-item">
-                          <time>2019-07-29</time>
-                          <a target="_self" href="/2019/07/29/Linux知识点/">Linux知识点</a>
-                        </div>
-                      
-                        
-                        <div class="timeline-item">
-                          <time>2019-07-16</time>
-                          <a target="_self" href="/2019/07/16/Linux—目录（积累）/">Linux-目录(积累)</a>
-                        </div>
-                      
-                        
-                        <div class="timeline-item">
-                          <time>2019-07-15</time>
-                          <a target="_self" href="/2019/07/15/数据结构-堆/">数据结构-堆</a>
-                        </div>
-                      
-                        
-                        <div class="timeline-item">
-                          <time>2019-07-15</time>
-                          <a target="_self" href="/2019/07/15/hello-world/">Hello World</a>
-                        </div>
-                      
-                    </div>
-                </div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">Linux脚本编程</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
             </div>
+            <div id="qr"></div>
         </div>
     </div>
+    <div class="scrollbar"></div>
 </div>
 
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Linux脚本编程</h1>
+        <div class="stuff">
+            <span>七月 30, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="about变量"><a href="#about变量" class="headerlink" title="about变量"></a><em>about变量</em></h2><p>1.如果要给变量赋一个含有空格的字符串值，必须用单引号来界定字符串的首和尾<br>2.如果要用到变量，使用$;如果要操作变量，不使用$，这条规则的一 个例外就是使用printenv显示某个变量的值<br>3.子shell无法使用export命令改变父shell中全局环境变量的值,在子进程中删除了一个全局环境变量,这只对子进程有效,该全局环境变量在父进程中依然可用<br>4.子shell可以继承父shell导出过的变量。 举例来说，如果父shell是登录shell，在/etc/profile、/etc/profile.d/*.sh和$HOME/.bashrc文件中<br>设置并导出了变量，用于执行脚本的子shell就能够继承这些变量。要记住，由父shell设置但并未导出的变量都是局部变量，子shell无法继承局部变量。<br>5.存储个人用户永久性bash shell变量的地方是$HOME/.bashrc文件<br>6.要给某个环境变量设置多个值，可以把值放在括号里，值与值之间用空格分隔<br>    🌰:mytest=(one two three four five)⚠️::环境变量数组的索引值都是从零开始</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
 </body>
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>

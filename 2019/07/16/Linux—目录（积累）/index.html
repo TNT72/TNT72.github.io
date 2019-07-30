@@ -10,9 +10,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="Linux—目录（积累）##文件系统层级标准FHS
-
-/etc/locale.conf:记录了系统语言变量配置尤其注意LANG &amp;amp;&amp;amp; LC_ALL这两个变量History指令配合”!,"> 
+    <meta name="description" content="Linux—目录（积累）文件系统层级标准FHS
+/etc/locale.conf:记录了系统语言变量配置尤其注意LANG &amp;amp;&amp;amp; LC_ALL这两个变量History指令配合”!数字”,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -64,14 +63,13 @@
 
         </div>
         <div class="content markdown">
-            <h1 id="Linux—目录（积累）"><a href="#Linux—目录（积累）" class="headerlink" title="Linux—目录（积累）"></a>Linux—目录（积累）</h1><p>##文件系统层级标准FHS</p>
-<ol>
+            <h1 id="Linux—目录（积累）"><a href="#Linux—目录（积累）" class="headerlink" title="Linux—目录（积累）"></a>Linux—目录（积累）</h1><h2 id="文件系统层级标准FHS"><a href="#文件系统层级标准FHS" class="headerlink" title="文件系统层级标准FHS"></a>文件系统层级标准FHS</h2><ol>
 <li>/etc/locale.conf:记录了系统语言变量配置<br>尤其注意LANG &amp;&amp; LC_ALL这两个变量<br>History指令配合”!数字”一起使用可下达曾经使用的指令</li>
 <li>~/.bash_history:注销账户后自动将历史记录存在这里</li>
 <li>/etc/issue:终端机进站画面配置<br>/etc/issue.net:远程登录时的终端进入画面配置</li>
 <li>/etc/motd:终端登录后显示给使用者的讯息</li>
 <li>/etc/profile &amp;&amp; (<del>/.bash_profile ||</del>/.bash_login|| ~/.profile):login shell 的配置文件<br>/etc/profile.d/*.sh:使用者具有r权限就会被/etc/profile呼叫进来</li>
-<li>～/.bashrc:会被~/.bash_profile呼叫，同时也是non-login shell 的配置文件，会呼叫/etc/profile.d/*.sh &amp;&amp; /etc/bashrc(Centos特有)</li>
+<li>～/.bashrc:会被~/.bash_profile呼叫，同时也是non-login shell 的配置文件，会呼叫/etc/profile.d/*.sh &amp;&amp; /etc/bashrc(Centos特有),如果bash是作为交互式shell启动的,它就不会访问/etc/profile文件,只会检查用户HOME目录中的.bashrc文件<br> .bashrc文件有两个作用:一是查看/etc目录下通用的bashrc文件，二是为用户提供一个定制自己的命令别名和私有脚本函数的地方</li>
 <li>/etc/man_db.conf:将/usr/local/softpackage/man放入其中，以供使用man来查询软件的说明</li>
 <li>/etc/inittab:内含管理开机自动启动进程的表</li>
 <li>/etc/init.d:将开机时启动 或停止某个应用的脚本放在这个目录下，这些脚本通过/etc/rcX.d目录下的入口(entry)1启动， 这里的X代表运行级(run level)</li>
@@ -81,6 +79,12 @@
 <li>/sbin:系统二进制目录，存放许多GNU管理员级工具</li>
 <li>/tmp:临时目录，可以在该目录中创建和删除临时工作文件</li>
 <li>“.”,”..”:当前目录,当前目录的父目录</li>
+<li>/bin/sh:默认的系统,用于系统shell脚本<br><img src="shell%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6.png" alt="“login shell启动文件”"></li>
+<li>/etc/passwd:将用户的登录名匹配到对应的UID值登录用户名<br> 用户密码、用户账户的UID(数字形式)、用户账户的组ID(GID)(数字形式) 、用户账户的文本描述(称为备注字段) 、用户HOME目录的位置、用户的默认shell</li>
+<li>/etc/shadow:保存用户密码，只有root用户才能访问</li>
+<li>/etc/default/useradd:usradd命令默认值储存</li>
+<li>/etc/skel:创建新用户HOME目录时的模板,默认的HOME目录配置</li>
+<li>/etc/group:包含系统上用到的每个组的信息<br> 组名、组密码、GID、属于该组的用户列表<br>/etc/login.defs:ubuntu中储存umask值</li>
 </ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->

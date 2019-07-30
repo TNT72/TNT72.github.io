@@ -62,7 +62,14 @@
 
         </div>
         <div class="content markdown">
-            <p>1.touch:创建空文件<br>2.cp:命令将源文件复制成一个新文件<br>3.ln:创建硬链接<br>4.mv:将文件和目录移动到另一个位置或重新命名<br>5.mkdir:创建目录<br>6.rmdir:删除目录<br>7.file:探测文件的内部，并决定文件是什么类型的<br>8.cat、more和less:查看文件全部内容，而tail和head命令查看文件中的一小部分内容<br>9.ps:输出运行在系统上的所有程序的许多信息,只能显示某个特定时间点的信息<br>10.top:显示进程信息，但它是实时显示的<br>11.kill:PID结束进程<br>12.killall:通过进程名而不是PID来结束进程<br>13.mount:输出当前系统上挂载的设备列表,在虚拟目录中挂载设备<br>14.umount:卸载设备<br>15.du:显示某个特定目录(默认情况下是当前目录)的磁盘使用情况</p>
+            <p>1.touch:创建空文件<br>2.cp:命令将源文件复制成一个新文件<br>3.ln:创建硬链接<br>4.mv:将文件和目录移动到另一个位置或重新命名<br>5.mkdir:创建目录<br>6.rmdir:删除目录<br>7.file:探测文件的内部，并决定文件是什么类型的<br>8.cat、more和less:查看文件全部内容，而tail和head命令查看文件中的一小部分内容<br>9.ps:输出运行在系统上的所有程序的许多信息,只能显示某个特定时间点的信息<br>10.top:显示进程信息，但它是实时显示的<br>11.kill:PID结束进程<br>12.killall:通过进程名而不是PID来结束进程<br>13.mount:输出当前系统上挂载的设备列表,在虚拟目录中挂载设备<br>14.umount:卸载设备<br>15.du:显示某个特定目录(默认情况下是当前目录)的磁盘使用情况<br>16.jobs:显示出当前运行 在后台模式中的所有用户的进程(作业)<br>17.coproc:进行协程处理🌰<br>    coproc My_Job { sleep 10; }，必须确保在第一个花括号({)和命令名之间有一个空格。还必须保证命令以分号(;)结尾。另外，分号和闭花括号(})之间也得有一个空格。<br>18.which和type命令找到外部命令<br>    命令type -a显示出了每个命令的两种实现。注意，which命令只显示出了外部命令文件<br>19.history:查看最近用过的命令列表<br>    !!唤出刚刚用过的那条命令来使用<br>20.alias:shell的内建命令,创建别名<br>21.env或printen:查看全局变量,显示个别环境变量的值，可以使用printenv命令<br>22.set:显示为某个特定进程设置的所有环境变量，包括局部变量、全局变量以及用户定义变量<br>23.unset:删除变量，⚠️  不要使用$<br>24.useradd:添加新用户<br>25.userdel:删除用户<br>    默认情况下，userdel命令会只 删除/etc/passwd文件中的用户信息，而不会删除系统中属于该账户的任何文件。如果加上-r参数，userdel会删除用户的HOME目录以及邮件目录。然而，系统上仍可能存有已删除用户的其他文件<br>26.usermod passwd chpasswd chage chfn chsh<br>修改用户账户的字段，还可以指定主要组以及附加组的所属关系<br>修改已有用户的密码<br>从文件中读取登录名密码对，并更新密码<br>修改密码的过期日期<br>修改用户账户的备注信息 修改用户账户的默认登录shell</p>
+<ol start="27">
+<li>chpasswd:从标准输入自动读取登录名和密码对(由冒号分割)列表，给密码加密，然后为用户账户设置。可以用重定向命令来将含有userid:passwd对的文件重定向给该命令。 </li>
+<li>groupadd:创建新组==&gt;usermod将用户加入组中</li>
+<li>groupmod:修改组</li>
+<li>umask:设置所创建文件和目录的默认权限</li>
+<li>chmod:改变文件权限</li>
+</ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
