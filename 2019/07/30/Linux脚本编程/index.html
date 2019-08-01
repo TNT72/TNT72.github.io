@@ -5,19 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title> - Hexo</title>
+    <title>Linux脚本编程 - Hexo</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="
-title: Linux脚本编程date: 2019-07-30 13:04:56tags:
-
-Linux
-
-
-about变量
-如果要给变量赋一个含有空格的字符串值，必须用单引号来界定字符串的首和,"> 
+    <meta name="description" content="about变量
+如果要给变量赋一个含有空格的字符串值，必须用单引号来界定字符串的首和尾
+如果要用到变量，使用$;如果要操作变量，不使用$，这条规则的一 个例外就是使用printenv显示某个变量的值,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -42,7 +37,7 @@ about变量
     <div class="bar" style="width: 0;"></div>
     <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
     <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle"></h3>
+    <h3 class="subtitle">Linux脚本编程</h3>
     <div class="social">
         <!--<div class="like-icon">-->
             <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -60,20 +55,16 @@ about变量
     <div class="section">
         <div class="article">
     <div class='main'>
-        <h1 class="title"></h1>
+        <h1 class="title">Linux脚本编程</h1>
         <div class="stuff">
-            <span>八月 01, 2019</span>
+            <span>七月 30, 2019</span>
             
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
 
         </div>
         <div class="content markdown">
-            <hr>
-<p>title: Linux脚本编程<br>date: 2019-07-30 13:04:56<br>tags:</p>
-<ul>
-<li>Linux</li>
-</ul>
-<hr>
-<h2 id="about变量"><a href="#about变量" class="headerlink" title="about变量"></a><strong>about变量</strong></h2><ol>
+            <h2 id="about变量"><a href="#about变量" class="headerlink" title="about变量"></a><strong>about变量</strong></h2><ol>
 <li>如果要给变量赋一个含有空格的字符串值，必须用单引号来界定字符串的首和尾</li>
 <li>如果要用到变量，使用$;如果要操作变量，不使用$，这条规则的一 个例外就是使用printenv显示某个变量的值;引用一个变量值时需要使 用美元符，而引用变量来对其进行赋值时则不要使用美元符$</li>
 <li>子shell无法使用export命令改变父shell中全局环境变量的值,在子进程中删除了一个全局环境变量,这只对子进程有效,该全局环境变量在父进程中依然可用</li>
@@ -89,7 +80,7 @@ about变量
 <li>重定向输入和输出:输出重定向将命令的输出发送到一个文件中。bash shell用大于号(&gt;)来完成这项功能,如果输出文件已经存在了，重定向操作符会用新的文件数据覆盖已有文件,在这种情况下，可以用双大于号(&gt;&gt;)来追加数据;输入重定向将文件的内容重定向到命令，而非将命令的输出重定向到文件</li>
 <li>管道(|):将命令输出重定向到另一个命令。这个过程叫作管道连接(piping)</li>
 <li>在bash中，在将一个数学运算结果赋给某个变量时，可以用美元符和方括号($[ operation ])或( $((operation)) )将数学表达式围起来</li>
-<li>bash shell数学运算符只支持整数运算。若要进行任何实际的数学计算，这是一个巨大的限制<br>::🌰::var3=$(echo “scale=4; $var1 / $var2” | bc)<br>bc命令能识别输入重定向，允许你将一个文件重定向到bc命令来处理;使用内联输入重定向，它允许直接在命令行中重定向数据。在shell脚本中可以将输出赋给一个变量<br>::🌰::<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">variable=$(bc &lt;&lt; EOF</span><br><span class="line">options</span><br><span class="line">statements</span><br><span class="line">expressions</span><br><span class="line">EOF )</span><br></pre></td></tr></table></figure>
+<li>bash shell数学运算符只支持整数运算。若要进行任何实际的数学计算，这是一个巨大的限制<br>🌰:var3=$(echo “scale=4; $var1 / $var2” | bc)<br>bc命令能识别输入重定向，允许你将一个文件重定向到bc命令来处理;使用内联输入重定向，它允许直接在命令行中重定向数据。在shell脚本中可以将输出赋给一个变量🌰<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">variable=$(bc &lt;&lt; EOF</span><br><span class="line">options</span><br><span class="line">statements</span><br><span class="line">expressions</span><br><span class="line">EOF )</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
@@ -99,26 +90,26 @@ about变量
 <li>变量$?来保存上个已执行命令的退出状态码 一个成功结束的命令的退出状态码是0。如果一个命令结束时有错误，退出状态 码就是一个正数值 。exit命令允许你在脚本结束时指定一 个退出状态码 </li>
 </ol>
 <hr>
-<h2 id="结构化命令"><a href="#结构化命令" class="headerlink" title="*结构化命令 *"></a>*<em>结构化命令 *</em></h2><h3 id="If-then"><a href="#If-then" class="headerlink" title="If then"></a><strong>If then</strong></h3><ol>
-<li><strong>if-then</strong>语句 （if-then语句不能测试命令退出状态码之外的条件 ）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if command </span><br><span class="line">then </span><br><span class="line">commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h2 id="结构化命令"><a href="#结构化命令" class="headerlink" title="结构化命令"></a><strong>结构化命令</strong></h2><h3 id="If-then"><a href="#If-then" class="headerlink" title="If then"></a><strong>If then</strong></h3><ol>
+<li><strong>if-then</strong>语句 (if-then语句不能测试命令退出状态码之外的条件)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if command </span><br><span class="line">then </span><br><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<p>or </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if command; then </span><br><span class="line">commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if command; then </span><br><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
 <p>Bash shell的if语句会运行if后面的那个命令。如果该命令的退出状态码是0 (该命令成功运行)，位于then部分的命令就会被执行。如果该命令的退出状态码是其他值，then 部分的命令就不会被执行，bash shell会继续执行脚本中的下一个命令。fi语句用来表示if-then 语句到此结束。 </p>
 <ol start="2">
 <li><p><strong>if-then-else</strong>语句 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if command </span><br><span class="line">then </span><br><span class="line">	commands </span><br><span class="line">else </span><br><span class="line">	commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if command </span><br><span class="line">then </span><br><span class="line">    commands </span><br><span class="line">else </span><br><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>嵌套if</strong>语句</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if command1 </span><br><span class="line">then </span><br><span class="line">	commands </span><br><span class="line">elif command2 </span><br><span class="line">then </span><br><span class="line">	more commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if command1 </span><br><span class="line">then </span><br><span class="line">    commands </span><br><span class="line">elif command2 </span><br><span class="line">then </span><br><span class="line">    more commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
 <p>elif语句行提供了另一个要测试的命令，这类似于原始的if语句行。如果elif后命令的退 出状态码是0，则bash会执行第二个then语句部分的命令。 ⚠️*<em>bash shell会依次执行if语句， 只有第一个返回退出状态码0的语句中的then部分会被执行。 *</em></p>
-<h3 id="test命令"><a href="#test命令" class="headerlink" title="*test命令 *"></a>*<em>test命令 *</em></h3><p>test命令可以判断三类条件 </p>
+<h3 id="test命令"><a href="#test命令" class="headerlink" title="test命令"></a><strong>test命令</strong></h3><p>test命令可以判断三类条件 </p>
 <ul>
 <li>数值比较</li>
 <li>字符串比较</li>
@@ -129,7 +120,7 @@ about变量
 <p>无需在if-then 语句中声明test 命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if [ condition ] </span><br><span class="line">then </span><br><span class="line">	commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
-<p>  方括号定义了测试条件。注意，第一个方括号之后和第二个方括号之前必须加上一个空格，否则就会报错。</p>
+<p>方括号定义了测试条件。注意，第一个方括号之后和第二个方括号之前必须加上一个空格，否则就会报错。</p>
 <h4 id="数值比较"><a href="#数值比较" class="headerlink" title="数值比较"></a>数值比较</h4><p>![](test命令的数值比较功能 .png)</p>
 <h4 id="字符串比较"><a href="#字符串比较" class="headerlink" title="字符串比较"></a>字符串比较</h4><p>![](test命令的字符串比较功能 .png)</p>
 <ol>
