@@ -96,12 +96,12 @@
 </li>
 </ol>
 <p>或者</p>
-<figure class="highlight plain"><figcaption><span>command; then </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if command; then </span><br><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
 <p>Bash shell的if语句会运行if后面的那个命令。如果该命令的退出状态码是0 (该命令成功运行)，位于then部分的命令就会被执行。如果该命令的退出状态码是其他值，then 部分的命令就不会被执行，bash shell会继续执行脚本中的下一个命令。fi语句用来表示if-then 语句到此结束。 </p>
 <ol start="2">
 <li><p><strong>if-then-else</strong>语句 </p>
-<figure class="highlight plain"><figcaption><span>command </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">then </span><br><span class="line">    commands </span><br><span class="line">else </span><br><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if command </span><br><span class="line">then </span><br><span class="line">    commands </span><br><span class="line">else </span><br><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>嵌套if</strong>语句</p>
 <figure class="highlight plain"><figcaption><span>command1 </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">then </span><br><span class="line">    commands </span><br><span class="line">elif command2 </span><br><span class="line">then </span><br><span class="line">    more commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
@@ -113,7 +113,7 @@
 <ul>
 <li>数值比较</li>
 <li>字符串比较</li>
-<li>文件比较<br><code>test condition</code>  test命令提供了在if-then语句中测试不同条件的途径 ,如果test命令中列出的条件成立,test命令就会退出并返回退出状态码0 <figure class="highlight plain"><figcaption><span>test condition </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">then </span><br><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<li>文件比较<br><code>test condition</code>  test命令提供了在if-then语句中测试不同条件的途径 ,如果test命令中列出的条件成立,test命令就会退出并返回退出状态码0 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if test condition </span><br><span class="line">then </span><br><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
