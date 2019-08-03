@@ -91,34 +91,23 @@
 <li>文件名中没有加入路径,这要求文件和脚本位于同一个目录中,如果不是的话,需要使用全路径名(不管是绝对路径还是相对路径)来 引用文件位置</li>
 </ol>
 <hr>
-<h2 id="结构化命令"><a href="#结构化命令" class="headerlink" title="结构化命令"></a><strong>结构化命令</strong></h2><h3 id="一、IF-THEN"><a href="#一、IF-THEN" class="headerlink" title="一、IF THEN"></a><strong><em>一、IF THEN</em></strong></h3><h4 id="总的If-then结构"><a href="#总的If-then结构" class="headerlink" title="总的If then结构"></a>总的<strong>If then</strong>结构</h4><ol>
-<li><strong>if-then</strong>语句 (if-then语句不能测试命令退出状态码之外的条件)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if command </span><br><span class="line">then </span><br><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h2 id="结构化命令"><a href="#结构化命令" class="headerlink" title="结构化命令"></a><strong>结构化命令</strong></h2><h3 id="一、IF-THEN"><a href="#一、IF-THEN" class="headerlink" title="一、IF THEN"></a><strong><em>一、IF THEN</em></strong></h3><h4 id="总的If-then结构"><a href="#总的If-then结构" class="headerlink" title="总的If then结构"></a>总的<strong>If then</strong>结构</h4><p>一、<strong>if-then</strong>语句 (if-then语句不能测试命令退出状态码之外的条件)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if command </span><br><span class="line">then </span><br><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
 <p>或者</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if command; then </span><br><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
-<p>Bash shell的if语句会运行if后面的那个命令。如果该命令的退出状态码是0 (该命令成功运行)，位于then部分的命令就会被执行。如果该命令的退出状态码是其他值，then 部分的命令就不会被执行，bash shell会继续执行脚本中的下一个命令。fi语句用来表示if-then 语句到此结束。 </p>
-<ol start="2">
-<li><p><strong>if-then-else</strong>语句 </p>
+<p>Bash shell的if语句会运行if后面的那个命令。如果该命令的退出状态码是0 (该命令成功运行)，位于then部分的命令就会被执行。如果该命令的退出状态码是其他值，then 部分的命令就不会被执行，bash shell会继续执行脚本中的下一个命令。fi语句用来表示if-then 语句到此结束。<br>二、<strong>if-then-else</strong>语句 </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if command </span><br><span class="line">then </span><br><span class="line">    commands </span><br><span class="line">else </span><br><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>嵌套if</strong>语句</p>
+
+<p>三、<strong>嵌套if</strong>语句</p>
 <figure class="highlight plain"><figcaption><span>command1 </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">then </span><br><span class="line">    commands </span><br><span class="line">elif command2 </span><br><span class="line">then </span><br><span class="line">    more commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
 <p>elif语句行提供了另一个要测试的命令，这类似于原始的if语句行。如果elif后命令的退 出状态码是0，则bash执行第二个then语句部分的命令。⚠️bash shell会依次执行if语句， 只有第一个返回退出状态码0的语句中的then部分会被执行</p>
-<h4 id="If-和-then-之间的判断语句"><a href="#If-和-then-之间的判断语句" class="headerlink" title="** If 和 then 之间的判断语句**"></a>** If 和 then 之间的判断语句**</h4><h5 id="一、test命令"><a href="#一、test命令" class="headerlink" title="一、test命令"></a>一、<strong>test命令</strong></h5><p>test命令可以判断三类条件:</p>
-<ul>
-<li>数值比较</li>
-<li>字符串比较</li>
-<li>文件比较<br><code>test condition</code>  test命令提供了在if-then语句中测试不同条件的途径 ,如果test命令中列出的条件成立,test命令就会退出并返回退出状态码0 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if test condition </span><br><span class="line">then </span><br><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h4 id="If-和-then-之间的判断语句"><a href="#If-和-then-之间的判断语句" class="headerlink" title="If 和 then 之间的判断语句"></a><strong>If 和 then 之间的判断语句</strong></h4><h5 id="一、test命令"><a href="#一、test命令" class="headerlink" title="一、test命令"></a>一、<strong>test命令</strong></h5><p>test命令可以判断三类条件:<br>    * 数值比较<br>    * 字符串比较<br>    * 文件比较<br>基本格式1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if test condition </span><br><span class="line">then </span><br><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
-</li>
-</ul>
-<p>无需在if-then 语句中声明test 命令</p>
+<p><code>test condition</code>  test命令提供了在if-then语句中测试不同条件的途径 ,如果test命令中列出的条件成立,test命令就会退出并返回退出状态码0<br>基本格式2（无需在if-then 语句中声明test 命令）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if [ condition ] </span><br><span class="line">then </span><br><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
 <p>方括号定义了测试条件。注意，第一个方括号之后和第二个方括号之前必须加上一个空格，否则就会报错。</p>
@@ -135,33 +124,29 @@
 </li>
 </ul>
 <h5 id="四、使用双方括号"><a href="#四、使用双方括号" class="headerlink" title="四、使用双方括号"></a>四、<strong>使用双方括号</strong></h5><p>双方括号命令提供了针对字符串比较的高级特性。<br>双方括号里的expression使用了test命令中采用的标准字符串比较。但它提供了test命令未提供的另一个特性——模式匹配</p>
-<h3 id="CASE语句"><a href="#CASE语句" class="headerlink" title="CASE语句"></a><strong><em>CASE语句</em></strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">case variable in</span><br><span class="line">pattern1 | pattern2) commands1;;</span><br><span class="line">pattern3) commands2;;</span><br><span class="line">*) default commands;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<h3 id="二、CASE语句"><a href="#二、CASE语句" class="headerlink" title="二、CASE语句"></a><strong><em>二、CASE语句</em></strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">case variable in</span><br><span class="line">pattern1 | pattern2) commands1;;</span><br><span class="line">pattern3) commands2;;</span><br><span class="line">*) default commands;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
 
 <p>可以通过竖线操作符在一行中分隔出多个模式模式。星号会捕获所有与已知模式不匹配的值</p>
-<h3 id="二、FOR循环"><a href="#二、FOR循环" class="headerlink" title="二、FOR循环"></a><strong><em>二、FOR循环</em></strong></h3><p>for命令的基本格式</p>
+<h3 id="三、FOR循环"><a href="#三、FOR循环" class="headerlink" title="三、FOR循环"></a><strong><em>三、FOR循环</em></strong></h3><p>for命令的基本格式</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for var in list</span><br><span class="line">do</span><br><span class="line">    commands</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 
-<h4 id="读取列表中的值"><a href="#读取列表中的值" class="headerlink" title="读取列表中的值"></a><strong>读取列表中的值</strong></h4><p>🌰:<code>for test in Alabama Alaska Arizona Arkansas California Colorado</code><br>而且在for循环结束后test变量依然可以使用，$test变量的值会在shell脚本的剩余部分一直保持有效。它会一直保持最后一次迭代的值</p>
-<h4 id="读取列表中的复杂值"><a href="#读取列表中的复杂值" class="headerlink" title="读取列表中的复杂值"></a><strong>读取列表中的复杂值</strong></h4><p>🌰:<code>for test in I don&#39;t know if this&#39;ll work #会出错</code></p>
-<ul>
-<li>使用转义字符(反斜线)来将单引号转义;</li>
-<li>使用双引号来定义用到单引号的值。<br><code>for test in I don\&#39;t know if &quot;this&#39;ll&quot; work #正确</code><br>for循环假定每个值都是用空格分割的，如果在单独的数据值中有空格，就必须用双引号将这些值圈起来<h4 id="从变量读取列表"><a href="#从变量读取列表" class="headerlink" title="从变量读取列表"></a><strong>从变量读取列表</strong></h4>🌰:<code>for state in $list</code><h4 id="从命令读取值"><a href="#从命令读取值" class="headerlink" title="从命令读取值"></a><strong>从命令读取值</strong></h4>生成列表中所需值的另外一个途径就是使用命令的输出。可以用命令替换来执行任何能产生输出的命令，然后在for命令中使用该命令的输出<br>🌰:<code>for var in $(order)</code><h4 id="字段分隔符IFS"><a href="#字段分隔符IFS" class="headerlink" title="字段分隔符IFS"></a><strong>字段分隔符IFS</strong></h4>环境变量IFS，叫作内部字段分隔符(internal field separator)。<br>IFS环境变量定义了bash shell用作字段分隔符的一系列字符。默认情况下，bash shell会将下列字符当作字段分隔符:</li>
-<li>空格</li>
-<li>制表符</li>
-<li>换行符<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">IFS.OLD=$IFS</span><br><span class="line">IFS=$&apos;\n&apos;</span><br><span class="line">&lt;在代码中使用新的IFS值&gt; </span><br><span class="line">IFS=$IFS.OLD</span><br></pre></td></tr></table></figure>
+<h4 id="1-读取列表中的值"><a href="#1-读取列表中的值" class="headerlink" title="1. 读取列表中的值"></a><strong>1. 读取列表中的值</strong></h4><p>🌰:<code>for test in Alabama Alaska Arizona Arkansas California Colorado</code><br>而且在for循环结束后test变量依然可以使用，$test变量的值会在shell脚本的剩余部分一直保持有效。它会一直保持最后一次迭代的值</p>
+<h4 id="2-读取列表中的复杂值"><a href="#2-读取列表中的复杂值" class="headerlink" title="2. 读取列表中的复杂值"></a><strong>2. 读取列表中的复杂值</strong></h4><p>🌰:<code>for test in I don&#39;t know if this&#39;ll work #会出错</code><br><code>for test in I don\&#39;t know if &quot;this&#39;ll&quot; work #正确</code><br>    * 使用转义字符(反斜线)来将单引号转义;<br>    * 使用双引号来定义用到单引号的值。<br>for循环假定每个值都是用空格分割的，如果在单独的数据值中有空格，就必须用双引号将这些值圈起来</p>
+<h4 id="3-从变量读取列表"><a href="#3-从变量读取列表" class="headerlink" title="3. 从变量读取列表"></a><strong>3. 从变量读取列表</strong></h4><p>🌰:<code>for state in $list</code></p>
+<h4 id="4-从命令读取值"><a href="#4-从命令读取值" class="headerlink" title="4. 从命令读取值"></a><strong>4. 从命令读取值</strong></h4><p>生成列表中所需值的另外一个途径就是使用命令的输出。可以用命令替换来执行任何能产生输出的命令，然后在for命令中使用该命令的输出<br>🌰:<code>for var in $(order)</code></p>
+<h4 id="5-字段分隔符IFS"><a href="#5-字段分隔符IFS" class="headerlink" title="5. 字段分隔符IFS"></a><strong>5. 字段分隔符IFS</strong></h4><p>环境变量IFS，叫作内部字段分隔符(internal field separator)。<br>IFS环境变量定义了bash shell用作字段分隔符的一系列字符。默认情况下，bash shell会将下列字符当作字段分隔符:<br>    * 空格<br>    * 制表符<br>    * 换行符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">IFS.OLD=$IFS</span><br><span class="line">IFS=$&apos;\n&apos;</span><br><span class="line">&lt;在代码中使用新的IFS值&gt; </span><br><span class="line">IFS=$IFS.OLD</span><br></pre></td></tr></table></figure>
 
-</li>
-</ul>
-<p>如果要指定多个IFS字符，只要将它们在赋值行串起来就行。<br>IFS=$’\n’:;”<br>这个赋值会将换行符、冒号、分号和双引号作为字段分隔符。</p>
-<h4 id="用通配符读取目录"><a href="#用通配符读取目录" class="headerlink" title="用通配符读取目录"></a><strong>用通配符读取目录</strong></h4><p><code>for file in /home/rich/test/*</code><br>for命令的c语言格式</p>
+<p>如果要指定多个IFS字符，只要将它们在赋值行串起来就行。<br>🌰:IFS=$’\n’:;”<br>这个赋值会将换行符、冒号、分号和双引号作为字段分隔符。</p>
+<h4 id="6-用通配符读取目录"><a href="#6-用通配符读取目录" class="headerlink" title="6. 用通配符读取目录"></a><strong>6. 用通配符读取目录</strong></h4><p><code>for file in /home/rich/test/*</code><br>for命令的c语言格式</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (( variable assignment ; condition ; iteration process ))</span><br><span class="line">do </span><br><span class="line">    ···</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 
 <p>变量可以定义多个，条件只能有一个</p>
-<h3 id="三、WHILE命令"><a href="#三、WHILE命令" class="headerlink" title="三、WHILE命令"></a><strong><em>三、WHILE命令</em></strong></h3><p>只要测试条件成立，while命令就会不停地循环执行定义好的命令<br>while命令的格式是:</p>
+<h3 id="四、WHILE命令"><a href="#四、WHILE命令" class="headerlink" title="四、WHILE命令"></a><strong><em>四、WHILE命令</em></strong></h3><p>只要测试条件成立，while命令就会不停地循环执行定义好的命令<br>while命令的格式是:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while test command </span><br><span class="line">do</span><br><span class="line">    other commands</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 
 <p>test command:任何普通的bash shell命令，或者用test命令进行条件测试,但退出状态码必须随着循环中运行的命令而改变。如果退出状态码不发生变化， while循环就将一直不停地进行下去</p>
-<h4 id="使用多个测试命令"><a href="#使用多个测试命令" class="headerlink" title="使用多个测试命令"></a><strong>使用多个测试命令</strong></h4>
+<h4 id="1-使用多个测试命令"><a href="#1-使用多个测试命令" class="headerlink" title="1. 使用多个测试命令"></a><strong>1. 使用多个测试命令</strong></h4>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
