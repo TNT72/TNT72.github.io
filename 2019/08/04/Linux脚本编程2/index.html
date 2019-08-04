@@ -93,7 +93,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">while [ -n &quot;$1&quot; ]</span><br><span class="line">    do</span><br><span class="line">       echo &quot;Parameter #$count = $1&quot;</span><br><span class="line">       count=$[ $count + 1 ]</span><br><span class="line">       shift</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>处理选项:用case语句来判断选项</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">while [ -n &quot;$1&quot; ]</span><br><span class="line">do</span><br><span class="line">   case &quot;$1&quot; in</span><br><span class="line">     -a) echo &quot;Found the -a option&quot; ;;</span><br><span class="line">     -b) echo &quot;Found the -b option&quot; ;;</span><br><span class="line">     -c) echo &quot;Found the -c option&quot; ;;</span><br><span class="line">      *) echo &quot;$1 is not an option&quot; ;;</span><br><span class="line">   esac</span><br><span class="line">shift </span><br><span class="line">done</span><br><span class="line">``` </span><br><span class="line">8. 分离参数和选项</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">while [ -n &quot;$1&quot; ]</span><br><span class="line">do</span><br><span class="line">   case &quot;$1&quot; in</span><br><span class="line">     -a) echo &quot;Found the -a option&quot; ;;</span><br><span class="line">     -b) echo &quot;Found the -b option&quot; ;;</span><br><span class="line">     -c) echo &quot;Found the -c option&quot; ;;</span><br><span class="line">      *) echo &quot;$1 is not an option&quot; ;;</span><br><span class="line">   esac</span><br><span class="line">shift </span><br><span class="line">done</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">8. 分离参数和选项</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
@@ -107,9 +107,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">getopts命令解析命令行选项时会移除开头的单破折线，所以在case定义中不用单破折线</span><br><span class="line">getopts命令的几个好用的功能:</span><br><span class="line">1.可以在参数值中包含空格($ ./test19.sh -b &quot;test1 test2&quot; -a)</span><br><span class="line">2.将选项字母和参数值放在一起使用，而不用加空格。($ ./test19.sh -abtest1)</span><br><span class="line">3.getopts还能够将命令行上 找到的所有未定义的选项统一输出成问号</span><br><span class="line"></span><br><span class="line">从文件中读取</span><br></pre></td></tr></table></figure>
 
 <p>count=1<br>cat test | while read line<br>do<br>   echo “Line $count: $line”<br>   count=$[ $count + 1]<br>done</p>
-<pre><code>可以用read命令来读取Linux系统上文件里保存的数据。每次调用read命令,它都会从文件中读取一行文本。当文件中再没有内容时,read命令会退出并返回非零退出状态码。
+<pre><code>
+可以用read命令来读取Linux系统上文件里保存的数据。每次调用read命令,它都会从文件中读取一行文本。当文件中再没有内容时,read命令会退出并返回非零退出状态码。
 将文件中的数据传给read命令。最常见的方法是对文件使用cat命令将结果通过管道直接传给含有read命令的while命令
-
 ---
 总结：
 1. bash shell提供了三种方式来处理命令行选项。
@@ -121,7 +121,7 @@
 命令行参数允许用户运行脚本时直接从命令行输入数据。脚本通过位置参数来取回命令行参数并将它们赋给变量。
 shift命令通过对位置参数进行轮转的方式来操作命令行参数。就算不知道有多少个参数， 这个命令也可以让你轻松遍历参数。
 除了参数外，脚本用户还可以用命令行选项来给脚本传递信息。命令行选项是前面带有单破折线的单个字母。可以给不同的选项赋值，从而改变脚本的行为
-
+---
 </code></pre>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
