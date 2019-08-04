@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Linux脚本编程2 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="处理用户输入
+位置参数:$0是程序名，$1是第 一个参数，$2是第二个参数，依次类推，直到第九个参数$9
+每个参数都是用空格分隔的
+如果脚本需要的命令行参数不止9个，你仍然可以处理，但是需要稍微修改,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">Linux脚本编程2</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Linux脚本编程2</h1>
+        <div class="stuff">
+            <span>八月 04, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="处理用户输入"><a href="#处理用户输入" class="headerlink" title="处理用户输入"></a>处理用户输入</h1><ol>
+<li>位置参数:$0是程序名，$1是第 一个参数，$2是第二个参数，依次类推，直到第九个参数$9</li>
+<li>每个参数都是用空格分隔的</li>
+<li>如果脚本需要的命令行参数不止9个，你仍然可以处理，但是需要稍微修改一下变量名。在第9个变量之后，你必须在变量数字周围加上花括号，比如${10}</li>
+<li>$0参数获取shell在命令行启动的脚本名,but<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash test.sh ==&gt; $0=test.sh</span><br><span class="line">./test.sh    ==&gt; $0=./test.sh</span><br><span class="line">bash /home/Christine/test5.sh ==&gt; $0=/home/Christine/test5.sh</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>如果要编写一个根据脚本名来执行不同功能的脚本，就得做点额外工作。得把脚本的运行路径给剥离掉。另外,还要删除与脚本名混杂在一起的命令<br>将脚本名从路径中提取出:basename命令会返回不包含路径的脚本名<br>⚠️技巧:用-ne测试命令行参数数量。如果参数数量不对，会显示一条错误消息告知脚本的正确用法</p>
+<ol start="5">
+<li>特殊参数变量:</li>
+</ol>
+<ul>
+<li>$#含有脚本运行时携带的命令行参数的个数</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;!#&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>就代表了最后一个命令行参数变量,当命令行上没有任何参数时,$#的值为0,params变量的值也一样,但该变量会返回命令行用到的脚本名</p>
+<ul>
+<li>$<em>变量会将命令行上提供的所有参数当作一个单词保存。这个单词包含了命令行中出现的每一个参数值。基本上$</em>变量会将这些参数视为一个整体,而不是多个个体。</li>
+<li>$@变量会将命令行上提供的所有参数当作同一字符串中的多个独立的单词。这样就能够遍历所有的参数值，得到每个参数,这通常通过for命令完成</li>
+</ul>
+<ol start="6">
+<li><p>移动变量:使用shift命令时,默认情况下它会将每个参数变量向左移动一个位置。所以,变量$3的值会移到$2中,变量$2的值会移到$1中,而变量$1的值则会被删除(注意,变量$0的值,也就是程序名,不会改变)<br>⚠️技巧:在不知道到底有多少参数时,可以只操作第一个参数,移动参数,然后继续操作第一个参数;使用shift命令的时候要小心。如果某个参数被移出,它的值就被丢弃了,无法再恢复。<br>🌰:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">while [ -n &quot;$1&quot; ]</span><br><span class="line">    do</span><br><span class="line">       echo &quot;Parameter #$count = $1&quot;</span><br><span class="line">       count=$[ $count + 1 ]</span><br><span class="line">       shift</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>处理选项:用case语句来判断选项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">while [ -n &quot;$1&quot; ]</span><br><span class="line">do</span><br><span class="line">   case &quot;$1&quot; in</span><br><span class="line">     -a) echo &quot;Found the -a option&quot; ;;</span><br><span class="line">     -b) echo &quot;Found the -b option&quot; ;;</span><br><span class="line">     -c) echo &quot;Found the -c option&quot; ;;</span><br><span class="line">      *) echo &quot;$1 is not an option&quot; ;;</span><br><span class="line">   esac</span><br><span class="line">shift </span><br><span class="line">done</span><br><span class="line">``` </span><br><span class="line">8. 分离参数和选项</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>while [ -n “$1” ]<br>do<br>       case “$1” in<br>          -a) echo “Found the -a option” ;;<br>          -b) echo “Found the -b option”;;<br>          -c) echo “Found the -c option” ;;<br>          –) shift #划重点<br>              break ;;<br>           *) echo “$1 is not an option”;;<br>       esac<br>shift<br>done</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">⚠️“--”号后面是参数,such as 输入 &quot;$ ./test16.sh -c -a -b -- test1 test2 test3&quot;</span><br><span class="line">9. 处理带值的选项</span><br><span class="line">处理的输入like this “$ ./testing.sh -a test1 -b -c -d test2”</span><br></pre></td></tr></table></figure>
+
+<p>while [ -n “$1” ]<br>do<br>       case “$1” in<br>          -a) echo “Found the -a option”;;<br>          -b) param=”$2”<br>              echo “Found the -b option, with parameter value $param”<br>              shift ;;#划重点<br>          -c) echo “Found the -c option”;;<br>          –) shift<br>              break ;;<br>           *) echo “$1 is not an option”;;<br>       esac<br>shift#划重点<br>done</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">10. 处理合并选项:getopt命令可以接受一系列任意形式的命令行选项和参数，并自动将它们转换成适当的格式</span><br><span class="line">命令格式如下：</span><br><span class="line">``getopt optstring parameters``</span><br><span class="line">在optstring中列出要在脚本中用到的每个命令行选项字母。然后，在每个需要参数值的选项字母后加一个冒号。getopt命令会基于定义的optstring解析提供的参数。</span><br><span class="line">such as &quot;getopt ab:cd -a -b test1 -cd test2 test3&quot;#其中选项b需要一个参数值，默认插入双破折线“--”来分隔行中的额外参数</span><br><span class="line">如果指定了一个不在optstring中的选项，默认情况下，getopt命令会产生一条错误消息,如果想忽略这条错误消息，可以在命令后加-q选项。</span><br><span class="line">11. 在脚本中使用getopt</span><br><span class="line">在脚本中加入``set -- $(getopt -q optstring &quot;$@&quot;)``</span><br><span class="line">such as:</span><br><span class="line">&quot;set -- $(getopt ab:cd: -a test1 -b test2 -c -d test4)</span><br><span class="line"> echo $@</span><br><span class="line"> -a -b test2 -c -d test4 -- test1&quot;</span><br><span class="line">getopt命令并不擅长处理带空格和引号的参数值。它会将空格当作参数分隔符，而不是根 据双引号将二者当作一个参数</span><br><span class="line">12. 在脚本中使用getopts</span><br><span class="line">与getopt不同，前者将命令行上选项和参数处理后只生成一个输出，而getopts命令能够和已有的shell参数变量配合默契</span><br><span class="line">optstring值类似于getopt命令中的那个。有效的选项字母都会列在optstring中，如果选项字母要求有个参数值，就加一个冒号。</span><br><span class="line">要去掉错误消息的话，可以在optstring之前加一个冒号。getopts命令将当前参数保存在命令行中定义的variable中。</span><br><span class="line">getopts命令会用到两个环境变量。</span><br><span class="line">1.如果选项需要跟一个参数值，OPTARG环境变量就会保存这个值。</span><br><span class="line">2.OPTIND环境变量保存了参数列表中getopts正在处理的参数位置</span><br></pre></td></tr></table></figure>
+
+<p>while getopts :ab:c opt<br>do<br>   case “$opt” in<br>      a) echo “Found the -a option” ;;<br>      b) echo “Found the -b option, with value $OPTARG”;;<br>      c) echo “Found the -c option” ;;<br>      *) echo “Unknown option: $opt”;;<br>esac<br>done</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">getopts命令解析命令行选项时会移除开头的单破折线，所以在case定义中不用单破折线</span><br><span class="line">getopts命令的几个好用的功能:</span><br><span class="line">1.可以在参数值中包含空格($ ./test19.sh -b &quot;test1 test2&quot; -a)</span><br><span class="line">2.将选项字母和参数值放在一起使用，而不用加空格。($ ./test19.sh -abtest1)</span><br><span class="line">3.getopts还能够将命令行上 找到的所有未定义的选项统一输出成问号</span><br><span class="line"></span><br><span class="line">从文件中读取</span><br></pre></td></tr></table></figure>
+
+<p>count=1<br>cat test | while read line<br>do<br>   echo “Line $count: $line”<br>   count=$[ $count + 1]<br>done</p>
+<pre><code>可以用read命令来读取Linux系统上文件里保存的数据。每次调用read命令,它都会从文件中读取一行文本。当文件中再没有内容时,read命令会退出并返回非零退出状态码。
+将文件中的数据传给read命令。最常见的方法是对文件使用cat命令将结果通过管道直接传给含有read命令的while命令
+
+---
+总结：
+1. bash shell提供了三种方式来处理命令行选项。
+第一种方式是将它们像命令行参数一样处理。可以利用位置参数变量来遍历选项，在每个选项出现在命令行上时处理它。
+另一种处理命令行选项的方式是用getopt命令。该命令会将命令行选项和参数转换成可以 在脚本中处理的标准格式。getopt命令允许你指定将哪些字母识别成选项以及哪些选项需要额 外的参数值。getopt命令会处理标准的命令行参数并按正确顺序输出选项和参数。
+处理命令行选项的最后一种方法是通过getopts命令(注意是复数)。getopts命令提供了 处理命令行参数的高级功能。它支持多值的参数，能够识别脚本未定义的选项。
+
+2. 3种不同的方法来从脚本用户处获得数据。
+命令行参数允许用户运行脚本时直接从命令行输入数据。脚本通过位置参数来取回命令行参数并将它们赋给变量。
+shift命令通过对位置参数进行轮转的方式来操作命令行参数。就算不知道有多少个参数， 这个命令也可以让你轻松遍历参数。
+除了参数外，脚本用户还可以用命令行选项来给脚本传递信息。命令行选项是前面带有单破折线的单个字母。可以给不同的选项赋值，从而改变脚本的行为
+
+</code></pre>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
