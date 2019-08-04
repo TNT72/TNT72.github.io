@@ -78,15 +78,16 @@
 <li>特殊参数变量:</li>
 </ol>
 <ul>
-<li>$#含有脚本运行时携带的命令行参数的个数</li>
+<li><p><code>$#</code>含有脚本运行时携带的命令行参数的个数</p>
+</li>
 <li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;!#&#125;</span><br></pre></td></tr></table></figure>
 
-</li>
-</ul>
 <p>就代表了最后一个命令行参数变量,当命令行上没有任何参数时,$#的值为0,params变量的值也一样,但该变量会返回命令行用到的脚本名</p>
-<ul>
-<li><code>$*</code>变量会将命令行上提供的所有参数当作一个单词保存。这个单词包含了命令行中出现的每一个参数值。基本上$*变量会将这些参数视为一个整体,而不是多个个体。</li>
-<li>$@变量会将命令行上提供的所有参数当作同一字符串中的多个独立的单词。这样就能够遍历所有的参数值，得到每个参数,这通常通过for命令完成</li>
+</li>
+<li><p><code>$*</code>变量会将命令行上提供的所有参数当作一个单词保存。这个单词包含了命令行中出现的每一个参数值。基本上$*变量会将这些参数视为一个整体,而不是多个个体。</p>
+</li>
+<li><p><code>$@</code>变量会将命令行上提供的所有参数当作同一字符串中的多个独立的单词。这样就能够遍历所有的参数值，得到每个参数,这通常通过for命令完成</p>
+</li>
 </ul>
 <ol start="6">
 <li><p>移动变量:使用shift命令时,默认情况下它会将每个参数变量向左移动一个位置。所以,变量$3的值会移到$2中,变量$2的值会移到$1中,而变量$1的值则会被删除(注意,变量$0的值,也就是程序名,不会改变)<br>⚠️技巧:在不知道到底有多少参数时,可以只操作第一个参数,移动参数,然后继续操作第一个参数;使用shift命令的时候要小心。如果某个参数被移出,它的值就被丢弃了,无法再恢复。<br>🌰:</p>
@@ -105,25 +106,29 @@
 <li><p>处理带值的选项<br>处理的输入like this “$ ./testing.sh -a test1 -b -c -d test2”</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">while [ -n &quot;$1&quot; ]</span><br><span class="line">do</span><br><span class="line">       case &quot;$1&quot; in</span><br><span class="line">          -a) echo &quot;Found the -a option&quot;;;</span><br><span class="line">          -b) param=&quot;$2&quot;</span><br><span class="line">              echo &quot;Found the -b option, with parameter value $param&quot;</span><br><span class="line">              shift ;;#划重点</span><br><span class="line">          -c) echo &quot;Found the -c option&quot;;;</span><br><span class="line">          --) shift</span><br><span class="line">              break ;;</span><br><span class="line">           *) echo &quot;$1 is not an option&quot;;;</span><br><span class="line">       esac</span><br><span class="line">shift#划重点</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>处理合并选项:getopt命令可以接受一系列任意形式的命令行选项和参数，并自动将它们转换成适当的格式<br>命令格式如下：<br><code>getopt optstring parameters</code><br>在optstring中列出要在脚本中用到的每个命令行选项字母。然后，在每个需要参数值的选项字母后加一个冒号。getopt命令会基于定义的optstring解析提供的参数。<br>such as “getopt ab:cd -a -b test1 -cd test2 test3”#其中选项b需要一个参数值，默认插入双破折线“–”来分隔行中的额外参数<br>如果指定了一个不在optstring中的选项，默认情况下，getopt命令会产生一条错误消息,如果想忽略这条错误消息，可以在命令后加-q选项。</p>
+<li><p>处理合并选项:getopt命令可以接受一系列任意形式的命令行选项和参数，并自动将它们转换成适当的格式<br>命令格式如下：<br><code>getopt optstring parameters</code><br>在optstring中列出要在脚本中用到的每个命令行选项字母。然后，在每个需要参数值的选项字母后加一个冒号。getopt命令会基于定义的optstring解析提供的参数。<br>such as “getopt ab:cd -a -b test1 -cd test2 test3”#其中选项b需要一个参数值，默认插入双破折线<code>--</code>来分隔行中的额外参数<br>如果指定了一个不在optstring中的选项，默认情况下，getopt命令会产生一条错误消息,如果想忽略这条错误消息，可以在命令后加-q选项。</p>
 </li>
-<li><p>在脚本中使用getopt<br>在脚本中加入<code>set -- $(getopt -q optstring &quot;$@&quot;)</code><br>such as:<br>“set – $(getopt ab:cd: -a test1 -b test2 -c -d test4)<br>echo $@<br>-a -b test2 -c -d test4 – test1”<br>getopt命令并不擅长处理带空格和引号的参数值。它会将空格当作参数分隔符，而不是根 据双引号将二者当作一个参数</p>
-</li>
-<li><p>在脚本中使用getopts<br>与getopt不同，前者将命令行上选项和参数处理后只生成一个输出，而getopts命令能够和已有的shell参数变量配合默契<br>optstring值类似于getopt命令中的那个。有效的选项字母都会列在optstring中，如果选项字母要求有个参数值，就加一个冒号。<br>要去掉错误消息的话，可以在optstring之前加一个冒号。getopts命令将当前参数保存在命令行中定义的variable中。<br>getopts命令会用到两个环境变量。</p>
-</li>
-<li><p>如果选项需要跟一个参数值，OPTARG环境变量就会保存这个值。</p>
-</li>
-<li><p>OPTIND环境变量保存了参数列表中getopts正在处理的参数位置</p>
+<li><p>在脚本中使用getopt<br>在脚本中加入<code>set -- $(getopt -q optstring &quot;$@&quot;)</code><br>such as:<br>set – $(getopt ab:cd: -a test1 -b test2 -c -d test4)<br>echo $@</p>
 </li>
 </ol>
+<p>-a -b test2 -c -d test4 – test1<br>getopt命令并不擅长处理带空格和引号的参数值。它会将空格当作参数分隔符，而不是根据双引号将二者当作一个参数</p>
+<ol start="12">
+<li>在脚本中使用getopts<br>与getopt不同，前者将命令行上选项和参数处理后只生成一个输出，而getopts命令能够和已有的shell参数变量配合默契<br>optstring值类似于getopt命令中的那个。有效的选项字母都会列在optstring中，如果选项字母要求有个参数值，就加一个冒号。<br>要去掉错误消息的话，可以在optstring之前加一个冒号。getopts命令将当前参数保存在命令行中定义的variable中。<br>getopts命令会用到两个环境变量。</li>
+</ol>
+<ul>
+<li>如果选项需要跟一个参数值，OPTARG环境变量就会保存这个值。</li>
+<li>OPTIND环境变量保存了参数列表中getopts正在处理的参数位置</li>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">while getopts :ab:c opt</span><br><span class="line">do</span><br><span class="line">   case &quot;$opt&quot; in</span><br><span class="line">      a) echo &quot;Found the -a option&quot; ;;</span><br><span class="line">      b) echo &quot;Found the -b option, with value $OPTARG&quot;;;</span><br><span class="line">      c) echo &quot;Found the -c option&quot; ;;</span><br><span class="line">      *) echo &quot;Unknown option: $opt&quot;;;</span><br><span class="line">esac </span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 
 <p>getopts命令解析命令行选项时会移除开头的单破折线，所以在case定义中不用单破折线<br>getopts命令的几个好用的功能:<br>1.可以在参数值中包含空格($ ./test19.sh -b “test1 test2” -a)<br>2.将选项字母和参数值放在一起使用，而不用加空格。($ ./test19.sh -abtest1)<br>3.getopts还能够将命令行上 找到的所有未定义的选项统一输出成问号</p>
-<p>从文件中读取</p>
+<ol start="13">
+<li>从文件中读取数据</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">count=1</span><br><span class="line">cat test | while read line </span><br><span class="line">do</span><br><span class="line">   echo &quot;Line $count: $line&quot;</span><br><span class="line">   count=$[ $count + 1]</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 
 <p>可以用read命令来读取Linux系统上文件里保存的数据。每次调用read命令,它都会从文件中读取一行文本。当文件中再没有内容时,read命令会退出并返回非零退出状态码。<br>将文件中的数据传给read命令。最常见的方法是对文件使用cat命令将结果通过管道直接传给含有read命令的while命令</p>
-<p>总结：</p>
+<p><strong>总结</strong>：</p>
 <ol>
 <li><p>bash shell提供了三种方式来处理命令行选项。<br>第一种方式是将它们像命令行参数一样处理。可以利用位置参数变量来遍历选项，在每个选项出现在命令行上时处理它。<br>另一种处理命令行选项的方式是用getopt命令。该命令会将命令行选项和参数转换成可以 在脚本中处理的标准格式。getopt命令允许你指定将哪些字母识别成选项以及哪些选项需要额 外的参数值。getopt命令会处理标准的命令行参数并按正确顺序输出选项和参数。<br>处理命令行选项的最后一种方法是通过getopts命令(注意是复数)。getopts命令提供了 处理命令行参数的高级功能。它支持多值的参数，能够识别脚本未定义的选项。</p>
 </li>
