@@ -10,9 +10,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="about变量
+    <meta name="description" content="变量
 如果要给变量赋一个含有空格的字符串值，必须用单引号来界定字符串的首和尾
-如果要用到变量，使用$;如果要操作变量，不使用$，这条规则的一 个例外就是使用printenv显示某个变量的值,"> 
+如果要用到变量，使用$;如果要操作变量，不使用$，这条规则的一 个例外就是使用printenv显示某个变量的值;引用一个,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -64,7 +64,7 @@
 
         </div>
         <div class="content markdown">
-            <h2 id="about变量"><a href="#about变量" class="headerlink" title="about变量"></a><strong>about变量</strong></h2><ol>
+            <h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a><strong>变量</strong></h2><ol>
 <li>如果要给变量赋一个含有空格的字符串值，必须用单引号来界定字符串的首和尾</li>
 <li>如果要用到变量，使用$;如果要操作变量，不使用$，这条规则的一 个例外就是使用printenv显示某个变量的值;引用一个变量值时需要使 用美元符，而引用变量来对其进行赋值时则不要使用美元符$</li>
 <li>子shell无法使用export命令改变父shell中全局环境变量的值,在子进程中删除了一个全局环境变量,这只对子进程有效,该全局环境变量在父进程中依然可用</li>
@@ -74,7 +74,7 @@
 <li>用户变量可以是任何由字母、数字或下划线组成的文本字符串，长度不超过20个。用户变量 区分大小写,使用等号将值赋给用户变量。在变量、等号和值之间不能出现空格</li>
 </ol>
 <hr>
-<h2 id="about编程"><a href="#about编程" class="headerlink" title="about编程"></a><strong>about编程</strong></h2><ol>
+<h2 id="零碎知识点"><a href="#零碎知识点" class="headerlink" title="零碎知识点"></a><strong>零碎知识点</strong></h2><ol>
 <li>在创建shell脚本文件时，必须在文件的第一行指定要使用的shell。其格式为: #!/bin/bash</li>
 <li>命令替换(从命令输出中提取信息，并将其赋给变量):法一、反引号字符;法二、$()格式</li>
 <li>重定向输入和输出:输出重定向将命令的输出发送到一个文件中。bash shell用大于号(&gt;)来完成这项功能,如果输出文件已经存在了，重定向操作符会用新的文件数据覆盖已有文件,在这种情况下，可以用双大于号(&gt;&gt;)来追加数据;输入重定向将文件的内容重定向到命令，而非将命令的输出重定向到文件</li>
@@ -146,7 +146,34 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while test command </span><br><span class="line">do</span><br><span class="line">    other commands</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 
 <p>test command:任何普通的bash shell命令，或者用test命令进行条件测试,但退出状态码必须随着循环中运行的命令而改变。如果退出状态码不发生变化， while循环就将一直不停地进行下去</p>
-<h4 id="1-使用多个测试命令"><a href="#1-使用多个测试命令" class="headerlink" title="1. 使用多个测试命令"></a><strong>1. 使用多个测试命令</strong></h4>
+<h4 id="1-使用多个测试命令"><a href="#1-使用多个测试命令" class="headerlink" title="1. 使用多个测试命令"></a><strong>1. 使用多个测试命令</strong></h4><p>while命令允许你在while语句行定义多个测试命令。只有最后一个测试命令的退出状态码会被用来决定什么时候结束循环<br>需要⚠️的是在每次迭代中所有的测试命令都会被执行,包括测试命令失败的最后一次迭代。<br>另一处要留意的是该如何指定多个测试命令。注意,每个测试命令都出现在单独的一行上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">while echo $var1</span><br><span class="line">      [ $var1 -ge 0 ]</span><br><span class="line">do</span><br><span class="line">    echo &quot;This is inside the loop&quot;</span><br><span class="line">    var1=$[ $var1 - 1 ]</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、UNTIL命令"><a href="#五、UNTIL命令" class="headerlink" title="五、UNTIL命令"></a><strong><em>五、UNTIL命令</em></strong></h3><p>until命令和while命令工作的方式完全相反。until命令要求你指定一个通常返回非零退出状态码的测试命令。只有测试命令的退出状态码不为0，bash shell才会执行循环中列出的命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">until test command</span><br><span class="line">do</span><br><span class="line">    other commands </span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="六、控制循环"><a href="#六、控制循环" class="headerlink" title="六、控制循环"></a><strong><em>六、控制循环</em></strong></h3><ul>
+<li><strong>break命令</strong></li>
+</ul>
+<ol>
+<li>跳出单个循环:在shell执行break命令时，它会尝试跳出当前正在执行的循环</li>
+<li>跳出内部循环:在处理多个循环时，break命令会自动终止你所在的最内层的循环</li>
+<li>跳出外部循环:有时你在内部循环，但需要停止外部循环。break命令接受单个命令行参数值:<br><code>break n</code> 其中n指定了要跳出的循环层级。默认情况下，n为1，表明跳出的是当前的循环。如果你将n设为2，break命令就会停止下一级的外部循环</li>
+</ol>
+<ul>
+<li><strong>continue命令</strong></li>
+</ul>
+<ol>
+<li>continue命令可以提前中止某次循环中的命令，但并不会完全终止整个循环。可以在循环 内部设置shell不执行命令的条件</li>
+<li>和break命令一样，continue命令也允许通过命令行参数指定要继续执行哪一级循环: continue n<br>其中n定义了要继续的循环层级。</li>
+</ol>
+<ul>
+<li><strong>处理循环输出</strong><br>对循环的输出使用管道或进行重定向可以通过在done命令之后添加一个处理命令来实现(将循环内的标准输出重定向到指定文件；或通过管道将输出进行处理）<br>要想把数据从文件中送入while命令，只需在while命令尾部使用一个重定向符<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">input=&quot;users.csv&quot;</span><br><span class="line">while IFS=&apos;,&apos; read -r userid name</span><br><span class="line">do</span><br><span class="line">  echo &quot;adding $userid&quot;</span><br><span class="line">  useradd -c &quot;$name&quot; -m $userid</span><br><span class="line">done &lt; &quot;$input&quot;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>$input变量指向数据文件，并且该变量被作为while命令的重定向数据,作为输入</p>
+
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
