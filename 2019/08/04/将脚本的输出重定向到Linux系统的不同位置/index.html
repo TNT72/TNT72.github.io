@@ -101,6 +101,18 @@
 <ol start="10">
 <li>进程的当前PID，可以用特殊环境变量$$查看</li>
 <li>阻止命令输出<br>将STDERR重定向到一个叫作null文件的特殊文件。null文件跟它的名字很像，文件里什么都没有。shell输出到null文件的任何数据都不会保存,全部都被丢掉了</li>
+<li>空文件的技巧:也可以在输入重定向中将/dev/null作为输入文件。由于/dev/null文件不含有任何内容,通常用它来快速清除现有文件中的数据,而不用先删除文件再重新创建。<br><code>cat /dev/null &gt; filename</code><br>文件filename仍然存在系统上，但现在它是空文件。这是清除日志文件的一个常用方法,因为日志文件必须时刻准备等待应用程序操作</li>
+<li>创建临时文件<br>Linux使用/tmp目录来存放不需要永久保留的文件。大多数Linux发行版配置了系统在启动时自动删除/tmp目录的所有文件<br>mktemp命令可以在/tmp目录中创建一个唯一的临时 文件。shell会创建这个文件，但不用默认的umask值(参见第7章)。它会将文件的读和写权限分配给文件的属主,并将你设成文件的属主。一旦创建了文件,你就在脚本中有了完整的读写权限,但其他人没法访问它(当然,root用户除外)</li>
+<li>创建本地临时文件<br>默认情况下，mktemp会在本地目录中创建一个文件<br>用法:<code>mktemp testing.XXXXXX</code> #文件名模板+6个X<br>mktemp命令的输出正是它所创建的文件的名字,所以可以这样将文件名储存在变量中<code>tempfile=$(mktemp test19.XXXXXX)</code></li>
+<li>在/tmp目录创建临时文件</li>
+</ol>
+<p>-t选项会强制mktemp命令来在系统的临时目录来创建该文件，在用这个特性时，mktemp命令会返回用来创建临时文件的全路径，而不是只有文件名</p>
+<ol start="16">
+<li>创建临时目录</li>
+</ol>
+<p>-d选项告诉mktemp命令来创建一个临时目录而不是临时文件</p>
+<ol start="17">
+<li>记录信息<br>tee:将输出同时发送到显示器和日志文件<br>tee命令将从STDIN过来的数据同时发往两处。一处是 STDOUT，另一处是tee命令行所指定的文件名<br><code>tee filename</code>默认将覆盖filename，使用-a选项可以改成追加模式</li>
 </ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->

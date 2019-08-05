@@ -5,12 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Linux命令 - Hexo</title>
+    <title>控制脚本 - Hexo</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="1.touch:创建空文件2.cp:命令将源文件复制成一个新文件3.ln:创建硬链接4.mv:将文件和目录移动到另一个位置或重新命名5.mkdir:创建目录6.rmdir:删除目录7.file:探测,"> 
+    <meta name="description" content="Linux信号
+Linux信号![](Linux 控制信号2.png)
+生成信号
+
+
+中断进程Ctrl+C
+暂停进程Ctrl+Zshell将shell中运行的每个进程称为作业， 并为每个作业分配唯一,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -35,7 +41,7 @@
     <div class="bar" style="width: 0;"></div>
     <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
     <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">Linux命令</h3>
+    <h3 class="subtitle">控制脚本</h3>
     <div class="social">
         <!--<div class="like-icon">-->
             <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -53,17 +59,56 @@
     <div class="section">
         <div class="article">
     <div class='main'>
-        <h1 class="title">Linux命令</h1>
+        <h1 class="title">控制脚本</h1>
         <div class="stuff">
-            <span>七月 29, 2019</span>
+            <span>八月 05, 2019</span>
             
   <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Linux/">Linux</a></li></ul>
 
 
         </div>
         <div class="content markdown">
-            <p>1.touch:创建空文件<br>2.cp:命令将源文件复制成一个新文件<br>3.ln:创建硬链接<br>4.mv:将文件和目录移动到另一个位置或重新命名<br>5.mkdir:创建目录<br>6.rmdir:删除目录<br>7.file:探测文件的内部，并决定文件是什么类型的<br>8.cat、more和less:查看文件全部内容，而tail和head命令查看文件中的一小部分内容<br>9.ps:输出运行在系统上的所有程序的许多信息,只能显示某个特定时间点的信息<br>10.top:显示进程信息，但它是实时显示的<br>11.kill:PID结束进程<br>12.killall:通过进程名而不是PID来结束进程<br>13.mount:输出当前系统上挂载的设备列表,在虚拟目录中挂载设备<br>14.umount:卸载设备<br>15.du:显示某个特定目录(默认情况下是当前目录)的磁盘使用情况<br>16.jobs:显示出当前运行 在后台模式中的所有用户的进程(作业)<br>17.coproc:进行协程处理🌰<br>    coproc My_Job { sleep 10; }，必须确保在第一个花括号({)和命令名之间有一个空格。还必须保证命令以分号(;)结尾。另外，分号和闭花括号(})之间也得有一个空格。<br>18.which和type命令找到外部命令<br>    命令type -a显示出了每个命令的两种实现。注意，which命令只显示出了外部命令文件<br>19.history:查看最近用过的命令列表<br>    !!唤出刚刚用过的那条命令来使用<br>20.alias:shell的内建命令,创建别名<br>21.env或printen:查看全局变量,显示个别环境变量的值，可以使用printenv命令<br>22.set:显示为某个特定进程设置的所有环境变量，包括局部变量、全局变量以及用户定义变量<br>23.unset:删除变量，⚠️  不要使用$<br>24.useradd:添加新用户<br>25.userdel:删除用户<br>    默认情况下，userdel命令会只 删除/etc/passwd文件中的用户信息，而不会删除系统中属于该账户的任何文件。如果加上-r参数，userdel会删除用户的HOME目录以及邮件目录。然而，系统上仍可能存有已删除用户的其他文件<br>26.usermod passwd chpasswd chage chfn chsh<br>修改用户账户的字段，还可以指定主要组以及附加组的所属关系<br>修改已有用户的密码<br>从文件中读取登录名密码对，并更新密码<br>修改密码的过期日期<br>修改用户账户的备注信息 修改用户账户的默认登录shell</p>
-<p>27.chpasswd:从标准输入自动读取登录名和密码对(由冒号分割)列表，给密码加密，然后为用户账户设置。可以用重定向命令来将含有userid:passwd对的文件重定向给该命令。<br>28.groupadd:创建新组==&gt;usermod将用户加入组中<br>29.groupmod:修改组<br>30.umask:设置所创建文件和目录的默认权限<br>31.chmod:改变文件权限<br>32.chown:改变文件的属主,也支持同时改变文件的属主和属组<br>33.chgrp:改变文件的默认属组都属于该目录的属组，这个组也就成为了每个用户的属组<br>34.fdisk:分区<br>35.partprob或hdparm:让系统 读取更新过的分区表<br>36.jobs:允许查看shell当前正在处理的作业</p>
+            <h2 id="Linux信号"><a href="#Linux信号" class="headerlink" title="Linux信号"></a><strong><em>Linux信号</em></strong></h2><ol>
+<li>Linux信号<br><img src="/2019/08/05/控制脚本/Linux%E6%8E%A7%E5%88%B6%E4%BF%A1%E5%8F%B7.png" alt><br>![](Linux 控制信号2.png)</li>
+<li>生成信号</li>
+</ol>
+<ul>
+<li>中断进程Ctrl+C</li>
+<li>暂停进程Ctrl+Z<br>shell将shell中运行的每个进程称为作业， 并为每个作业分配唯一的作业号。它会给第一个作业分配作业号1，第二个作业号2，以此类推<br>可以用ps命令来查看已停止的作业,在S列中(进程状态)，ps命令将已停止作业的状态为显示为T。这说明命令要么被跟踪，要么被停止了</li>
+</ul>
+<ol start="3">
+<li>捕获信号<br>trap命令允许你来指定shell 脚本要监看并从shell中拦截的Linux信号。如果脚本收到了trap命令中列出的信号，该信号不再 由shell处理，而是交由本地处理<br>格式为:<code>trap commands signals</code><br>在trap命令行上，你只要列出想要shell执行的命令，以及一组用空格分开的待捕获的信号。你可以用数值或Linux信号名来指定信号。</li>
+<li>捕获脚本退出<br>在shell完成任务时 执行命令的一种简便方法<br><code>trap &quot;echo Goodbye...&quot; EXIT</code></li>
+<li>修改或移除捕获<br>要想在脚本中的不同位置进行不同的捕获处理，只需重新使用带有新选项的trap命令,修改了信号捕获之后，脚本处理信号的方式就会发生变化。但如果一个信号是在捕获被修改 前接收到的，那么脚本仍然会根据最初的trap命令进行处理。<br>也可以删除已设置好的捕获。只需要在trap命令与希望恢复默认行为的信号列表之间加上两个破折号就行了,like this<code>trap &quot;echo &#39; Sorry... Ctrl-C is trapped.&#39;&quot; SIGINT</code>+<code>trap --SIGINT</code><h2 id="以后台模式运行脚本"><a href="#以后台模式运行脚本" class="headerlink" title="以后台模式运行脚本"></a><strong><em>以后台模式运行脚本</em></strong></h2>在后台模式中， 进程运行时不会和终端会话上的STDIN、STDOUT以及STDERR关联</li>
+<li>后台运行脚本<br>在命令后加个&amp;符,⚠️最好是将后台运行的脚本的STDOUT和STDERR进行重定向输出<h2 id="在非控制台下运行脚本"><a href="#在非控制台下运行脚本" class="headerlink" title="在非控制台下运行脚本"></a><strong><em>在非控制台下运行脚本</em></strong></h2>nohup命令:让脚本一直以后台模式运行到结束，即使你退出了终端会话,nohup命令运行了另外一个命令来阻断所有发送给该进程的SIGHUP信号,这会在退出终端会话时阻止进程退出<br>格式为:<code>nohup ./test1.sh &amp;</code><br>由于nohup命令会解除终端与进程的关联，进程也就不再同STDOUT和STDERR联系在一起。<br>为了保存该命令产生的输出，nohup命令会自动将STDOUT和STDERR的消息重定向到一个名为 nohup.out的文件中。<h2 id="作业控制"><a href="#作业控制" class="headerlink" title="作业控制"></a><strong><em>作业控制</em></strong></h2>启动、停止、终止以及恢复作业的这些功能统称为作业控制<br>作业控制中的关键命令是jobs命令。jobs命令允许查看shell当前正在处理的作业。<br>要想查看作业的PID，可以在jobs命令中加入-l选项<br><img src="/2019/08/05/控制脚本/jobs%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0.png" alt></li>
+<li>重启停止的作业<br>bg命令加上作业号<h2 id="定时运行作业"><a href="#定时运行作业" class="headerlink" title="定时运行作业"></a><strong><em>定时运行作业</em></strong></h2>at命令允许指定Linux系统何时运行脚本。at命令会将作业提交到队列中，指定shell何时运行该作业。at的守护进程atd会以后台模式运行，检查作业队列来运行作业。大多数Linux发行版会在启动时运行此守护进程。<br>atd守护进程会检查系统上的一个特殊目录(通常位于/var/spool/at)来获取用at命令提交的作业。默认情况下，atd守护进程会每60秒检查一下这个目录。有作业时，atd守护进程会检查作业设置运行的时间。如果时间跟当前时间匹配，atd守护进程就会运行此作业。</li>
+<li>设置定时运行<br>命令格式:<code>at [-f filename] time</code></li>
+<li>获取输出<br>注意⚠️:Linux系统会将提交该作业的用户的电子邮件地址作为STDOUT和STDERR,so因此在使用at命令时，最好在脚本中对STDOUT和STDERR进行重定向,如果不想在at命令中使用邮件或重定向，最好加上-M选项来屏蔽作业产生的输出信息</li>
+<li>列出等待的作业<code>atq</code></li>
+<li>删除作业<code>atrm 作业号</code></li>
+<li>安排需要定期执行的脚本</li>
+</ol>
+<ul>
+<li><ol>
+<li>cron时间表<br><code>min hour dayofmonth month dayofweek command</code><br>such as <code>15 16 * * 1 command</code>#每周一4:15 PM运行的命令<br><code>00 12 * * * if [</code>date +%d -d tomorrow<code>= 01 ] ; then ; command</code> #设置一个在每个月的最后一天执行的命令<br>注意⚠️：</li>
+</ol>
+</li>
+</ul>
+<p>1.命令列表必须指定要运行的命令或脚本的全路径名<br>2.你必须有访问该命令和命令中指定的 输出文件的权限。</p>
+<ul>
+<li><ol start="2">
+<li>构建cron时间表<br><code>crontab -l</code></li>
+</ol>
+</li>
+<li><ol start="3">
+<li>预配置的cron脚本目录<code>/etc/cron.*ly</code></li>
+</ol>
+</li>
+<li><ol start="4">
+<li>anacron程序<br>这个功能常用于进行常规日志维护的脚本。如果系统在脚本应该运行的时间刚好关机， 日志文件就不会被整理，可能会变很大。通过anacron，至少可以保证系统每次启动时整理日 志文件</li>
+</ol>
+</li>
+</ul>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
