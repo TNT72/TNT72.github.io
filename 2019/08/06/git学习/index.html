@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>git学习 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="Git 初始化及仓库创建和操作Git 本地操作
+基本信息设置
+
+
+设置用户名git config --global user.name github用户名
+设置用户名邮箱git config --g,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">git学习</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">git学习</h1>
+        <div class="stuff">
+            <span>八月 06, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Git/">Git</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="Git-初始化及仓库创建和操作"><a href="#Git-初始化及仓库创建和操作" class="headerlink" title="Git 初始化及仓库创建和操作"></a><strong>Git 初始化及仓库创建和操作</strong></h2><h3 id="Git-本地操作"><a href="#Git-本地操作" class="headerlink" title="Git 本地操作"></a><strong><em>Git 本地操作</em></strong></h3><ol>
+<li>基本信息设置</li>
+</ol>
+<ul>
+<li>设置用户名<br><code>git config --global user.name github用户名</code></li>
+<li>设置用户名邮箱<br><code>git config --global user.email github邮箱</code></li>
+</ul>
+<ol start="2">
+<li><p>初始化一个新的Git仓库<br><code>mkdir work_directory</code><br><code>cd work_directory</code><br><code>git init</code><br>会产生一个.git文件</p>
+</li>
+<li><p>向仓库添加文件<br>在工作区生成文件后将文件提交到暂存区<code>git add filename</code>+<code>git status</code><br>将在暂存区文件提交到git仓库<code>git commit -m &#39;add filename&#39;</code></p>
+</li>
+<li><p>修改仓库文件<br>第一步修改文件vim filename<br>第二步git add<br>对比文件差异<br>git diff 文件名#工作区和暂存区对比<br>git diff 本地库历史版本 文件名#工作区文件和本地库历史记录对比</p>
+</li>
+<li><p>删除文件</p>
+</li>
+<li><p>删除本地库文件</p>
+</li>
+</ol>
+<ul>
+<li>删除文件<br><code>rm filename</code></li>
+<li>从git中删除文件<br><code>git rm filename</code></li>
+<li>提交操作<br><code>git commit -m &#39;提交描述&#39;</code></li>
+</ul>
+<p>2.删除提交到暂存区，取消删除，找回文件<br>git reset –hard 被删除文件创建时的索引<br>删除文件找回前提：删除前文件已经提交到本地库</p>
+<ol start="6">
+<li>分支操作</li>
+</ol>
+<ul>
+<li>创建分支 git branch 分支名</li>
+<li>查看分支 git branch -v</li>
+<li>切换分支 git checkout 分支名</li>
+<li>合并分支</li>
+</ul>
+<p>1.切换到接收修改的分支 git checkout 被合并分支名<br>2.执行merge命令 git merge 有新内容的分支名</p>
+<ul>
+<li>合并时冲突产生：两个分支同时修改同一个文件同一行</li>
+<li>解决冲突：<br>vim 冲突文件可以看到冲突表现<br>git add 冲突文件<br>git commit -m “啪啪啪” #不带文件名</li>
+</ul>
+<ol start="7">
+<li>查看历史记录即显示<br>git log<br>git log –oneline<br>git log –pretty=oneline#只显示过去<br>git reflog#当前版本移动需要几步</li>
+</ol>
+<ol start="8">
+<li>版本前进后退</li>
+</ol>
+<ul>
+<li>基于索引<br>git reset –hard 索引值</li>
+<li>使用^<br>git reset –hard HEAD^#后退一步</li>
+<li>使用～<br>git reset –hard HEAD ~n步数</li>
+</ul>
+<p>reset命令三个参数对比<br>–soft<br>仅仅在本地库移动HEAD指针<br>–mixed<br>在本地库移动HEAD指针<br>重置暂存区<br>–hard<br>在本地库移动HEAD指针<br>重置暂存区<br>重置工作区</p>
+<h2 id="Git管理远程仓库"><a href="#Git管理远程仓库" class="headerlink" title="Git管理远程仓库"></a><strong><em>Git管理远程仓库</em></strong></h2><ol>
+<li><p>创建远程仓库别名<br>git remote -v 查看当前所有远程地址别名<br>git remote add [远程库地址别名] [远程地址]</p>
+</li>
+<li><p>Git推送操作<br>将本地仓库同步到远程仓库将<br>git push [远程库地址别名] [分支名]<br>git push &lt;远程主机名&gt; &lt;本地分支名&gt;  &lt;远程分支名&gt; </p>
+</li>
+<li><p>Git克隆操作</p>
+</li>
+</ol>
+<ul>
+<li>目的<br>将远程仓库(github对应项目)复制到本地</li>
+<li>代码<br><code>git clone 仓库地址</code></li>
+<li>效果</li>
+</ul>
+<p>1.完整的把远程库下载到本地<br>2.创建origin远程地址别名<br>3.初始化本地仓库</p>
+<ol start="4">
+<li><p>Git拉取操作<br>pull=fetch+merge<br>git fetch [远程库地址别名 远程分支名]<br>git merge [远城地址别名/远程分支名]<br>git pull [远程库地址别名] [远程分支名]</p>
+</li>
+<li><p>解决冲突</p>
+</li>
+<li><p>如果不是基于GitHub远程库的最新版所做的修改，不能推送，必须先拉取。</p>
+</li>
+<li><p>拉取下来后如果进入冲突状态，则按照“分支冲突解决”操作解决即可。</p>
+</li>
+</ol>
+<h2 id="Git-基本原理"><a href="#Git-基本原理" class="headerlink" title="Git 基本原理"></a><strong>Git 基本原理</strong></h2><ol>
+<li>哈希</li>
+</ol>
+<h2 id="一些问题的解决"><a href="#一些问题的解决" class="headerlink" title="一些问题的解决"></a><strong>一些问题的解决</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">To https://github.com/Jackzhou1999/test_git.git</span><br><span class="line"> ! [rejected]        master -&gt; master (fetch first)</span><br><span class="line">error: failed to push some refs to &apos;https://github.com/Jackzhou1999/test_git.git&apos;</span><br><span class="line">hint: Updates were rejected because the remote contains work that you do</span><br><span class="line">hint: not have locally. This is usually caused by another repository pushing</span><br><span class="line">hint: to the same ref. You may want to first integrate the remote changes</span><br><span class="line">hint: (e.g., &apos;git pull ...&apos;) before pushing again.</span><br><span class="line">hint: See the &apos;Note about fast-forwards&apos; in &apos;git push --help&apos; for details.</span><br></pre></td></tr></table></figure>
+
+<p>本地没有update到最新版本的项目<br>解决<code>git pull --rebase origin master</code></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
