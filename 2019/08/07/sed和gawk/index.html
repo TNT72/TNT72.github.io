@@ -9,8 +9,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
-    <meta name="keywords" content="Fechin,"> 
-    
+    <meta name="keywords" content="Zhou_sir,"> 
+    <meta name="description" content="sed 编辑器sed编辑器被称作流编辑器,sed编辑器可以根据命令来处理数据流中的数据，这些命令要么从命令行中输入，要么存储在一个命令文本文件中sed编辑器会执行下列操作:(1) 一次从输入中读取一,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -57,10 +57,84 @@
         <div class="stuff">
             <span>八月 07, 2019</span>
             
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
 
         </div>
         <div class="content markdown">
-            
+            <h2 id="sed-编辑器"><a href="#sed-编辑器" class="headerlink" title="sed 编辑器"></a><strong><em>sed 编辑器</em></strong></h2><p>sed编辑器被称作流编辑器,sed编辑器可以根据命令来处理数据流中的数据，这些命令要么从命令行中输入，要么存储在一个命令文本文件中<br>sed编辑器会执行下列操作:<br>(1) 一次从输入中读取一行数据。<br>(2) 根据所提供的编辑器命令匹配数据。<br>(3) 按照命令修改流中的数据。<br>(4) 将新的数据输出到STDOUT。<br>sed命令的格式如下:<br><code>sed options script file</code><br><img src="/2019/08/07/sed和gawk/sed%E5%91%BD%E4%BB%A4%E9%80%89%E9%A1%B9.png" alt><br>sed编辑器并不会修改文本文件的数据。它只会将修改后的数据发送到 3 STDOUT</p>
+<ol>
+<li>在命令行使用多个编辑器命令<br>使用-e选项<br><code>sed -e &#39;s/brown/green/; s/dog/cat/&#39; data1.txt</code><br>⚠️:命令之间必须用分号隔开，并且在命令末尾和分号 8 之间不能有空格。</li>
+<li>从文件中读取编辑器命令<br>用-f选项来指定文件来读取命令<br>不用在每条命令后面放一个分号。sed编辑器知道每行都是一条单独的命令</li>
+<li>命令<br>一、s命令<br>功能：替换功能,但默认情况下它只替换每行中出现的第一处<br>格式：<code>s/string/string/</code></li>
+<li>替换标记：让替换命令能够替换一行中不同地方出现的文本<br>格式：<code>s/pattern/replacement/flags</code><br>有4种可用的替换标记flags:</li>
+</ol>
+<ul>
+<li>数字，表明新文本将替换第几处模式匹配的地方; </li>
+<li>g，表明新文本将会替换所有匹配的文本;</li>
+<li>p，配合-n选项一起使用，只输出被替换命令修改过的行</li>
+<li>w file，将替换的结果写到文件中，只将哪些可以匹配的被处理过的行写入文件，其显示和p配合-n选项一样</li>
+</ul>
+<p>2.字符串分隔符<br>不一定一定要使用s/string_a/string_b/，也可以s!string_a!string_b!<br>二、d命令<br>功能:删除行<br>1.删除特定行<br>sed ‘nd’ filename<br>sed ‘n1,n2d’ filename<br>sed ‘n1,$d’ filename<br>sed ‘/pattern/d’ filename<br>三、i命令 and a命令<br>插入(insert)命令(i)会在指定行前增加一个新行<br>附加(append)命令(a)会在指定行后增加一个新行<br>格式：</p>
+<figure class="highlight plain"><figcaption><span>'[address]command\</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new line&apos; filename</span><br></pre></td></tr></table></figure>
+
+<p>⚠️:必须在sed命令中单独指定新行<br>such as </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed &apos;ni\</span><br><span class="line">new line&apos; filename</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed &apos;$i\</span><br><span class="line">new line1\</span><br><span class="line">new line2&apos; filename</span><br></pre></td></tr></table></figure>
+
+<p>四、c命令<br>修改(change)命令允许修改数据流中整行文本的内容<br>格式和i and s命令一样<br>such as </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed &apos;/pattern/c\</span><br><span class="line">the change line&apos; filenname</span><br></pre></td></tr></table></figure>
+
+<p>五、y命令<br>转换(transform)命令(y)是唯一可以处理单个字符的sed编辑器命令<br>格式:<br><code>[address]y/inchars/outchars/</code><br>换命令会对inchars和outchars值进行一对一的映射。inchars中的第一个字符会被转<br>换为outchars中的第一个字符，第二个字符会被转换成outchars中的第二个字符。这个映射过程会一直持续到处理完指定字符。<br>⚠️ ：<br>1.inchar和outchar必须等长<br>2.转换命令是一个全局命令，也就是说，它会文本行中找到的所有指定字符自动进行转换，而不会考虑它们出现的位置。<br>六、p and = and l命令</p>
+<ul>
+<li>p命令用来打印文本行;</li>
+<li>等号(=)命令用来打印行号; </li>
+<li>l(小写的L)命令用来列出行。</li>
+</ul>
+<ol>
+<li>p命令<br>例子:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sed -n &apos;/3/&#123;</span><br><span class="line">&gt; p</span><br><span class="line">&gt; s/line/test/p</span><br><span class="line">&gt; &#125;&apos; data6.txt</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>2.=命令<br>等号命令会打印行在数据流中的当前行号。行号由数据流中的换行符决定<br>例子:<br>让sed编辑器只显示包含匹配文本模式的行的行号和文本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sed -n &apos;/pattern/&#123; </span><br><span class="line">&gt; =</span><br><span class="line">&gt; p</span><br><span class="line">&gt; &#125;&apos; data6.txt</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>l命令<br>打印特殊字符<br>七、w命令<br>用来向文件写入行<br>格式:<br><code>[address]w filename</code><br>八、r命令<br>功能:将一个独立文件中的数据插入到数据流中,sed编辑器会将文件中的文本插入到指定地址后。<br>格式:<br><code>[address]r filename</code><br>地址区间，只能指定单独一个行号或文本模式地址<br>例子：利用另一个文件中的数据来替换文件中的占位字符<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sed &apos;/LIST/&#123;</span><br><span class="line">r data11.txt</span><br><span class="line">d</span><br><span class="line">&#125;&apos; notice.std</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>解析：data11内容替换notice.std中的list占位符,并删除占位符</p>
+<ol start="5">
+<li>使用地址<br>如果只想将命令作用于特定行或某些行，则必须用行寻址<br>两种形式的行寻址</li>
+<li>以数字形式表示行区间<br>sed ‘n1,n2s/string1/string2/‘ filename<br>sed ‘ns/string1/string2/‘ filename(其中n为数字)<br>sed ‘n,$/string1/string2/‘ filename</li>
+<li>用文本模式来过滤出行<br>格式:/pattren/command<br>such as <code>sed &#39;/pattern_string/s/string1/string2/&#39; filename</code><br>必须用正斜线将要指定的pattern封起来。sed编辑器会将该命令作用到包含指定文本模式的行上</li>
+<li>命令组合<br>格式：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">address &#123;</span><br><span class="line">    command1</span><br><span class="line">    command2</span><br><span class="line">    command3 </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>such as:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sed &apos;2&#123;</span><br><span class="line">&gt; s/fox/elephant/</span><br><span class="line">&gt; s/dog/cat/</span><br><span class="line">&gt; &#125;&apos; data1.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="gawk-程序"><a href="#gawk-程序" class="headerlink" title="gawk 程序"></a><strong><em>gawk 程序</em></strong></h2><p> 定义变量来保存数据;<br> 使用算术和字符串操作符来处理数据;<br> 使用结构化编程概念(比如if-then语句和循环)来为数据处理增加处理逻辑;<br> 通过提取数据文件中的数据元素，将其重新排列或格式化，生成格式化报告。<br>gawk程序的基本格式如下:<br><code>gawk options program file</code></p>
+<ol>
+<li>从命令行读取程序脚本<br>gawk程序脚本用一对花括号来定义。你必须将脚本命令放到两个花括号({})中。<br>由于gawk命令行假定脚本是单个文本字符串，你还必须将脚本放到单引号中。<br>like this <code>gawk &#39;{print &quot;Hello World!&quot;}&#39;</code><br>gawk程序会从STDIN接收数据,gawk程序会针对数据流中的每行文本执行程序脚本<br>要终止这个gawk程序,Ctrl+D组合键会在bash中产生一个EOF字符。这个组合键能够终止该gawk程序并返回到命令行界面提示符下</li>
+<li>使用数据字段变量<br>gawk会自动给一行中的每个数据元素分配一个变量,每个数据字段都是通过字段分隔符划分的。gawk在读取一行文本时，会用预定 义的字段分隔符划分每个数据字段。gawk中默认的字段分隔符是任意的空白字符(例如空格或制表符)</li>
+</ol>
+<ul>
+<li>$0代表整个文本行;</li>
+<li>$1代表文本行中的第1个数据字段;</li>
+<li>$2代表文本行中的第2个数据字段;</li>
+<li>$n代表文本行中的第n个数据字段。<br>注意使用-F来指定IFS</li>
+</ul>
+<ol start="3">
+<li>在程序脚本中使用多个命令<br>在命令行上的程序脚本中使用多条命令，只要在命令之间放个分号即可</li>
+<li>从文件中读取程序<br>使用-f选项<br>可以在程序文件中指定多条命令。要这么做的话，只要一条命令放一行即可<br>可以在文件中定义了一个叫作FS的特殊变量。这是定义字段分隔符的另一种方法，这样你就不用依靠脚本用户在命令行选项中定义字段分隔符了</li>
+<li>在处理数据前运行脚本<br>默认情况下，gawk会从输入中读取一行文本，然后针对该行的数据执行程序脚本。有时可能需要在处理数据前运行脚本，比如为报告创建标题。BEGIN 关键字就是用来做这个的。它会强制gawk在读取数据前执行BEGIN关键字后指定的程序脚本<br><code>gawk &#39;BEGIN {print &quot;The data3 File Contents:&quot;} {print $0}&#39; data3.txt</code></li>
+<li>在处理数据后运行脚本<br>END关键字允许你指定一个程序脚本，gawk会在读完数据后执行它<br><code>gawk &#39;BEGIN {print &quot;The data3 File Contents:&quot;}{print $0} END{print &quot;End of File&quot;}&#39; data3.txt</code></li>
+</ol>
+
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">

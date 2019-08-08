@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
-    <meta name="keywords" content="Fechin,"> 
+    <meta name="keywords" content="Zhou_sir,"> 
     <meta name="description" content="案例一、12345678910#!/bin/bash    # read file and create INSERT statements for MySQL    outfile=&amp;apos;m,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
@@ -69,7 +69,11 @@
 <li>cat &gt; $outfile 命令用于连接文件并打印到标准输出设备上(打开outfile文件并将标准输入重定向到outfile文件中）</li>
 <li>&lt;&lt;EOF 内容 EOF:将内容作为标准输出</li>
 </ol>
-<h2 id="案例二、"><a href="#案例二、" class="headerlink" title="案例二、"></a>案例二、</h2>
+<h2 id="案例二、"><a href="#案例二、" class="headerlink" title="案例二、"></a>案例二、</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#/bin/bash</span><br><span class="line"></span><br><span class="line">count=0</span><br><span class="line">echo $PATH</span><br><span class="line">for i in $(echo $PATH | sed &apos;s/:/ /g&apos;)</span><br><span class="line">do</span><br><span class="line">    count=$[ $count + 1 ]</span><br><span class="line">    echo $count &quot;In the directory:&quot; $i</span><br><span class="line">    files=$(ls $i)</span><br><span class="line">    count2=0</span><br><span class="line">    cd $i</span><br><span class="line">    for j in $files</span><br><span class="line">        do</span><br><span class="line"></span><br><span class="line">            if [ -f &quot;$j&quot; ];then</span><br><span class="line">                #echo &quot;-------&quot; $j</span><br><span class="line">                count2=$(($count2 + 1))</span><br><span class="line">            fi</span><br><span class="line">        done</span><br><span class="line">        echo &quot;there are $count2 file in the $i&quot;</span><br><span class="line">    cd -</span><br><span class="line">done</span><br><span class="line">echo $count</span><br></pre></td></tr></table></figure>
+
+<p>统计文件个数</p>
+<h2 id="案例三、"><a href="#案例三、" class="headerlink" title="案例三、"></a>案例三、</h2><p>~<br>~<br>~<br>~<br>~<br>~<br>~<br>~<br>~<br>~<br>~<br>~<br>~<br>~<br>~<br>~<br>~<br>~<br>~<br>~<br>~<br>“count.sh” 23L, 392C                                                                                                                        1,1          全部</p>
+
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
