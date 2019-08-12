@@ -10,7 +10,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Zhou_sir,"> 
-    
+    <meta name="description" content="输入
+cin根据接受值的变量的类型来将字符序列转换为所需类型
+cin检查输入流时跳过空白(换行符,空格,制表符)
+cin确定字符串结尾的方式:空白(制表符,空格,换行符),cin在获取字符输入时只读,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -57,10 +60,136 @@
         <div class="stuff">
             <span>八月 08, 2019</span>
             
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/C/">C++</a></li></ul>
+
 
         </div>
         <div class="content markdown">
-            
+            <h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a><strong><em>输入</em></strong></h2><ol>
+<li>cin根据接受值的变量的类型来将字符序列转换为所需类型</li>
+<li>cin检查输入流时跳过空白(换行符,空格,制表符)</li>
+<li>cin确定字符串结尾的方式:空白(制表符,空格,换行符),cin在获取字符输入时只读取一个单词,并自动在结尾加上空字符</li>
+<li>使用cin&gt;&gt;array方式无法控制输入字符数不超出a数组容量</li>
+<li>cin&gt;&gt;string使用的是string类的友元函数</li>
+<li>一次读取一行的方式:</li>
+</ol>
+<ul>
+<li>cin.getline(array_name,n,’split_symbol’)<br>注意点:</li>
+</ul>
+<p>1.返回值为cin对象<br>2.读取(n-1)个字符,若输入超过数组容量,余下字符留在输入队列中,同时设置失效位关闭后面的输入<br>3.自动在结尾加上空字符,不保留分界字符<br>4.停止读取:读取指定数目字符or分界字符(默认换行符),通过分界字符确定结尾但不保存换行符,用空字符代替分界字符<br>5.对于输入方法立即到达文件为这一情况:设置failbit<br>6.对于输入了一个空行:不设置failbit</p>
+<ul>
+<li>cin.get(array_name,n)<br>注意点:</li>
+</ul>
+<p>1.返回值为cin对象<br>2.不读取分界字符也不丢弃分界字符符,⚠️而是把它保存在输入队列中<br>3.通过查看下一个字符是换行符还是其他字符就可以判断输入结束是因为数组容量限制还是输入结束(\n)<br>4.读取空行是设置失效位failbit,可用cin.clear()恢复输入<br>5.对于输入方法立即到达文件为这一情况:设置failbit<br>6.对于输入空行:设置failbit</p>
+<ol start="7">
+<li>一次读取一个字符的方式:</li>
+</ol>
+<ul>
+<li>int a=cin.get()</li>
+</ul>
+<p>1.读取下一个字符,任何字符都可以被读取包括(空格,制表符,换行符)<br>2.到达文件尾时返回EOF符号常量</p>
+<ul>
+<li>ostream&amp; cin.get(char&amp;)<br>⚠️1.返回值为对象引用</li>
+</ul>
+<p>2.到文件尾时不会再给参数赋值</p>
+<ul>
+<li>cin&gt;&gt;char a<br>⚠️1.将跳过换行符,空格</li>
+</ul>
+<ol start="8">
+<li>读取指定数目字符并丢弃</li>
+</ol>
+<ul>
+<li>ostream &amp;cin.ignore(int n,char a)<br>n:最大字符数<br>a:输入分界符</li>
+</ul>
+<ol start="9">
+<li>其他一些istream方法<br>cin.read(array_name,array_capicity):不会在输入后加上空字符使其成为字符串<br>char a=cin.peek():返回输入中的下一个字符,但不抽取输入流中的字符<br>putback():将一个字符插入到输入字符串中</li>
+<li>cin&gt;&gt;int a<br>注意点:<br>返回值是cin对象<br>输入数字后的换行符会留在输入队列中<br>解决方法:</li>
+<li>cin.get()</li>
+<li>cin.get(ch)</li>
+<li>getline(cin,string)<br>结束的三个标志:</li>
+<li>到达文件尾</li>
+<li>遇到分界字符,将把分界字符从输入流中删除但不储存它</li>
+<li>读取的字符数达到最大允许值string::npos</li>
+</ol>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a><strong><em>输出</em></strong></h2><ol>
+<li><p>IO类之间的关系<br><img src="/2019/08/08/C-的IO/IO%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB.png" alt></p>
+</li>
+<li><p>cout输出指针</p>
+</li>
+<li><p>输出字符型指针时输出字符串,字符型指针有:char数组名,char类型指针,字符串</p>
+</li>
+<li><p>输出其他类型的指针时,输出的是地址</p>
+</li>
+<li><p>ostream方法</p>
+</li>
+<li><p>ostream&amp; operator&lt;&lt;()函数</p>
+</li>
+<li><p>ostream&amp; put(char)函数<br>cout.put(66)==&gt;输出为ascii码66的char值B</p>
+</li>
+<li><p>ostream&amp; write()函数<br>第一个参数为要显示的字符串的地址;第二个参数指出要显示多少个字符</p>
+</li>
+<li><p>刷新输出缓冲区</p>
+</li>
+<li><p>换行符发送到缓冲区后,将刷新缓冲区</p>
+</li>
+<li><p>输入即将发生时刷新缓冲区</p>
+</li>
+<li><p>控制符flush刷新缓冲区</p>
+</li>
+<li><p>控制符endl刷新缓冲区并插入一个换行符<br>flush(cout)<br>cout&lt;&lt;flush</p>
+</li>
+<li><p>cout输出格式化:</p>
+</li>
+<li><p>“&lt;&lt;”运算法将值转换为文本格式<br><img src="/2019/08/08/C-的IO/%E6%8F%92%E5%85%A5%E8%BF%90%E7%AE%97%E7%AC%A6%E5%B0%86%E5%80%BC%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%96%87%E6%9C%AC%E6%A0%BC%E5%BC%8F.png" alt></p>
+</li>
+<li><p>控制进制</p>
+</li>
+</ol>
+<ul>
+<li>hex</li>
+<li>dec</li>
+<li>oct</li>
+</ul>
+<p>3.调整字符宽度<br>⚠️:设置仅对下一次输出有效<br>两种格式:<br>int width():返回字段宽度的当前设置<br>int width(int i):设置字段宽度并返回以前的字段宽度<br>用法:int b = cout.width(a)<br>4.填充字符<br>cout.fill()<br>5.浮点数的显示精度</p>
+<ul>
+<li>默认模式<br>精度:显示的总位数</li>
+<li>定点模式and科学模式<br>精度:小数点后面的位数<br>定点表示法:使用格式123.4来表示浮点数,而不管数字的长度<br>科学表示法:使用格式1.23e04<br>用法:<br>cout.precision(n)<br>⚠️:设置后长期有效</li>
+</ul>
+<p>6.打印末尾的小数点和零<br>cout.setf(ios_base::showpoint)<br>7.setf()函数<br>⚠️:ios_base定义于std名称空间中,使用时要using std::ios_base<br>两种格式:<br>一.fmtflags setf(fmtflags)<br>fmtflags是bitmask类型;<br><img src="/2019/08/08/C-的IO/bitmask.png" alt><br>一些格式常量:<br><img src="/2019/08/08/C-的IO/%E6%A0%BC%E5%BC%8F%E5%B8%B8%E9%87%8F.png" alt><br>二.fmtflags setf(fmtflags,fmtflags)<br>第一个参数:所需设置的位<br>第二个参数:指出要清除那位<br>个人理解:第二个参数直接全清恢复全零状态,然后第一位再设置所需要的位<br><img src="/2019/08/08/C-的IO/setf%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B01.png" alt><br><img src="/2019/08/08/C-的IO/setf%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B02.png" alt></p>
+<ol start="6">
+<li>标准控制符<br>用法:cout&lt;&lt;标控<br><img src="/2019/08/08/C-的IO/%E6%A0%87%E5%87%86%E6%8E%A7%E5%88%B6%E7%AC%A61.png" alt><br><img src="/2019/08/08/C-的IO/%E6%A0%87%E5%87%86%E6%8E%A7%E5%88%B6%E7%AC%A62.png" alt><br>头文件iomanip中的控制符<br>setprecision()<br>setw()<br>setfill()</li>
+</ol>
+<h3 id="文件IO"><a href="#文件IO" class="headerlink" title="文件IO"></a><strong><em>文件IO</em></strong></h3><p>1.包含头文件fstream<br>2.必须指明命名空间std</p>
+<ul>
+<li>将内容写入文件</li>
+</ul>
+<p>ofstream fout;<br>fout.open(filename);<br>fouttext line;<br>fout.close()</p>
+<p>背记方法:将内容输入到文件类比与cout将内容输入到屏幕</p>
+<ul>
+<li>读取文本文件</li>
+</ul>
+<p>string a;<br>ifstream fin;<br>fin.open(filename);<br>fin&gt;&gt; a;<br>fin.close();</p>
+<ul>
+<li><p>检查文件是否打开</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">include&lt;cstdlib&gt;</span><br><span class="line">if(!fin.is_open())&#123;</span><br><span class="line">exit(EXIT_FAILURE)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>循环输入<br>代码1.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fin&gt;&gt;a;</span><br><span class="line">while(fin.good())&#123;</span><br><span class="line">fin&gt;&gt;a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>代码2.<br><code>while(fin&gt;&gt;a){}</code><br>原因:fin&gt;&gt;a返回值是fin对象,在需要判断时fin的结果为fin.good()</p>
+<ul>
+<li>流状态<br>由三个元素组成:eofbit,badbit,failbit<br>流状态位被设置后流将对后面的输入或输出关闭<br>一、检查IO错误方法</li>
+</ul>
+<p>1.eof():遇到eof<br>2.fail():读取操作类型不匹配,遇到文件尾EOF;badbit或failbit被设置<br>3.bad():文件受损或硬件故障,文件读取错误<br>4.good():没有发生任何错误时返回true<br>二、设置流状态<br>clear(iostate s):无参数时重置状态,<br>setstate(iostate s):无参数时重置状态,有参数时该参数被设置,其他两个状态位被清除<br>exceptions(iostate ex):设置ex位被设置,有参数时只影响参数设置的位</p>
+<p>对于输入错误的处理代码(输入类型和要求类型不符合)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">char a[20];</span><br><span class="line">while(!cin&gt;&gt;a[i])&#123;</span><br><span class="line">    if(cin.fail()&amp;&amp;!cin.eof())&#123;</span><br><span class="line">        cin.clear();</span><br><span class="line">        while(cin.get()!=&apos;\n&apos;)</span><br><span class="line">        continue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>文件模式<br><img src="/2019/08/08/C-的IO/%E6%96%87%E4%BB%B6%E6%A8%A1%E5%BC%8F.png" alt></li>
+</ul>
+
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
