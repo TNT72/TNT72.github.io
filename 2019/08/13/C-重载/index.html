@@ -18,10 +18,9 @@
 只能通过成员函数重载的运算符:
 
 
-1.=:赋值运算符2.():函数调用运算符3.[]:4.-&amp;gt;:
+1.=:赋值运算符2.():函数调用运算符3.[]:中括号运算符4.-&amp;gt;:
 
-重载运算符
-作为非成,"> 
+重载运算,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -81,12 +80,18 @@
 <li><p>只能通过成员函数重载的运算符:</p>
 </li>
 </ol>
-<p>1.=:赋值运算符<br>2.():函数调用运算符<br>3.[]:<br>4.-&gt;:</p>
+<p>1.=:赋值运算符<br>2.():函数调用运算符<br>3.[]:中括号运算符<br>4.-&gt;:</p>
 <ol start="4">
-<li>重载运算符</li>
-<li>作为非成员函数(包括友元函数)<br>最好是友元函数可以访问类的私有数据,两个操作数都作为参数传递</li>
-<li>作为成员函数<br>一个操作数通过this指针隐式传递,另一个作为函数参数传递</li>
-<li>⚠️二者选其一</li>
+<li><p>重载运算符</p>
+</li>
+<li><p>作为非成员函数(包括友元函数)<br>最好是友元函数可以访问类的私有数据,两个操作数都作为参数传递</p>
+</li>
+<li><p>作为成员函数<br>一个操作数通过this指针隐式传递,另一个作为函数参数传递</p>
+</li>
+<li><p>⚠️二者选其一</p>
+</li>
+<li><p>中括号运算符重载<br>原型:<br><code>char &amp; operator[](int a)</code>:读写非const对象<br><code>const char &amp; operator[](int a) const</code>:读写const对象</p>
+</li>
 </ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
