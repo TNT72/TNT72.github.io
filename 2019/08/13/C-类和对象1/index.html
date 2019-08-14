@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>C++类和对象1 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Zhou_sir,"> 
+    <meta name="description" content="零碎知识点1.使用enum在类的public部分创建常量enum Mode{ ONE,TWE}2.定义类内特定的常量private:enum{A=250}static const int A=250,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">C++类和对象1</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">C++类和对象1</h1>
+        <div class="stuff">
+            <span>八月 13, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/C/">C++</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/类/">类</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="零碎知识点"><a href="#零碎知识点" class="headerlink" title="零碎知识点"></a>零碎知识点</h3><p>1.使用enum在类的public部分创建常量<br>enum Mode{ ONE,TWE}<br>2.定义类内特定的常量<br>private:enum{A=250}<br>static const int A=250;<br>3.静态类成员<code>static int a</code><br>类的所有对象共享一个数据成员<br>初始化:int class_name::a=20,位置在类声明之外,不带static关键字<br>初始化在方法文件中,不能在头文件中,否则将出现多个初始化副本<br>注意⚠️:如果静态成员是整形或枚举型const,可以在类声明中初始化<br>4.C++自动提供下列成员函数<br><img src="/2019/08/13/C-类和对象1/%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0.png" alt></p>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><ul>
+<li>默认构造函数<br>原型:<code>class_name();</code><br>如果定义了构造函数,将不会定义默认构造函数,如果要在创建对象是不显式初始化必须显式定义默认构造函数<code>class_name::class_name(){}</code><br>⚠️:没有参数或参数有默认值, <em>二者选其一</em><br>用途:<code>class_name obj</code>时调用</li>
+</ul>
+<ul>
+<li>转换函数(将参数类型的值转换为类对象或将类转换为某种类型)</li>
+</ul>
+<ol>
+<li>参数类型转换为类对象<br>原型:<code>class_name(double);</code><br>只接受一个参数或第二个参数被提供了默认值<br>使用explicit关键字可以关闭隐式转换<code>explicit class_name (double var){}</code>,使用之后只允许使用显式强制类型转换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class_name (double var)&#123;&#125;//转换函数</span><br><span class="line">class_name obj;</span><br><span class="line">obj=12.4;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>分析:12.4调用转换函数生成临时对象,然后使用赋值运算符重载函数进行逐成员复制,此过程为隐式转换(自动进行)<br>隐式类型转换发生场景<br>1.class_name obj(12)<br>2.obj=12<br>3.将参数类型的值传递给接受以类为参数的函数<br>4.返回值被声明为类时返回的却是参数类型</p>
+<ol start="2">
+<li>类转换为参数类型<br>原型:<code>operator double() const</code><br>注意:</li>
+<li>必须是类方法</li>
+<li>不能指定返回类型,double就是返回类型</li>
+<li>不能有参数</li>
+<li>使用explicit关键词可以避免隐式类型转换</li>
+</ol>
+<ul>
+<li>复制构造函数<br>原型:<code>class_name(const class_name&amp; )</code><br>使用一个对象来初始化另一个对象<br>何时被调用:在按值传递对象和返回对象时被调用<br>例子:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class_name A;</span><br><span class="line">class_name B(A);//1</span><br><span class="line">class_name B=A;//2等价于class_name B=class_name(A),调用的函数为class_name(const class_name &amp;)</span><br><span class="line">class_name B=class_name(A);//3</span><br><span class="line">class_name* B=new class_name(A);//4</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>⚠️:第二三种方法:可能使用复制构造函数直接生成B对象,也可能使用复制构造函数生成临时对象在建临时对象复制给B<br>第四种方法:初始化一个匿名对象然后将其地址赋给B指针<br>默认复制构造函数:执行浅拷贝,复制的是成员的值<br>需要显式定义复制构造函数的情况:<br>1.类中包含了使用new初始化的指针成员</p>
+<ul>
+<li>赋值运算符<br>默认赋值运算符原型:<code>class_name &amp; class_name::operator=(const class_name&amp;)</code><br>何时被调用:将已有对象赋给另一对象,注意⚠️初始化时不一定会调用赋值运算符,参考复制构造函数的第二三种方法<br>它是怎么赋值的:逐成员按值复制<br>何时显式定义赋值运算符:看情况😓</li>
+</ul>
+<h3 id="静态成员函数"><a href="#静态成员函数" class="headerlink" title="静态成员函数:"></a>静态成员函数:</h3><p>1.函数声明包含关键字static,函数定义不包含关键字<br>2.不能通过对象调用<br>3.不能使用this指针<br>4.只能使用静态数据成员</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
