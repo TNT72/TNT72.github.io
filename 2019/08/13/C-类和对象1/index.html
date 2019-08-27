@@ -57,7 +57,7 @@
         <div class="stuff">
             <span>八月 13, 2019</span>
             
-  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/C/">C++</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/类/">类</a></li></ul>
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/C/">C++</a></li></ul>
 
 
         </div>
@@ -74,7 +74,7 @@
 
 </li>
 </ol>
-<p>分析:12.4调用转换函数生成临时对象,然后使用赋值运算符重载函数进行逐成员复制,此过程为隐式转换(自动进行)<br>隐式类型转换发生场景<br>1.class_name obj(12)<br>2.obj=12<br>3.将参数类型的值传递给接受以类为参数的函数<br>4.返回值被声明为类时返回的却是参数类型</p>
+<p>分析:12.4调用转换函数生成临时对象,然后使用赋值运算符重载函数进行逐成员复制,此过程为隐式转换(自动进行)<br>隐式类型转换发生场景<br>一.class_name obj(12)<br>二.obj=12<br>三.将参数类型的值传递给接受以类为参数的函数<br>四.返回值被声明为类时返回的却是参数类型</p>
 <ol start="2">
 <li>类转换为参数类型<br>原型:<code>operator double() const</code><br>注意:</li>
 <li>必须是类方法</li>
@@ -94,10 +94,8 @@
 <h3 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h3><p>基类一定要定义一个虚析构函数</p>
 <h3 id="静态成员函数"><a href="#静态成员函数" class="headerlink" title="静态成员函数:"></a>静态成员函数:</h3><p>1.函数声明包含关键字static,函数定义不包含关键字<br>2.不能通过对象调用<br>3.不能使用this指针<br>4.只能使用静态数据成员</p>
 <h3 id="返回对象的方式"><a href="#返回对象的方式" class="headerlink" title="返回对象的方式"></a>返回对象的方式</h3><ul>
-<li>返回指向对象的引用<br>一.类没有复制构造函数时必须返回对象的引用<br>二.不使用复制构造函数<br>三.在类继承使用虚函数时,指向基类的引用可以指向派生类<br>两种常见的形式</li>
-</ul>
-<p>1.重载赋值运算符<br>用途:s1=s2=s3<br>2.重载与cout连用的&lt;&lt;运算符<br>原因:ostream类没有复制构造函数</p>
-<ul>
+<li><p>返回指向对象的引用<br>一.类没有复制构造函数时必须返回对象的引用<br>二.不使用复制构造函数<br>三.在类继承使用虚函数时,指向基类的引用可以指向派生类<br>两种常见的形式<br>一.重载赋值运算符<br>用途:s1=s2=s3<br>二.重载与cout连用的&lt;&lt;运算符<br>原因:ostream类没有复制构造函数</p>
+</li>
 <li><p>返回指向对象的const引用<br>一.不能作为左值(如果参数是const&amp;a,要返回a,则返回类型必须声明为const&amp;,否则将const变量传给a形式参数可能存在利用返回值修改const变量的危险)<br>二.省去拷贝构造</p>
 </li>
 <li><p>返回对象<br>一.将调用复制构造函数构造一个调用程序可以访问的对象</p>
