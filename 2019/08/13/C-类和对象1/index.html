@@ -68,7 +68,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class_name (double var)&#123;&#125;//转换函数</span><br><span class="line">class_name obj;</span><br><span class="line">obj=12.4;</span><br></pre></td></tr></table></figure>
 
 <p>分析:12.4调用转换函数生成临时对象,然后使用赋值运算符重载函数进行逐成员复制,此过程为隐式转换(自动进行)<br>隐式类型转换发生场景<br>一.class_name obj(12)<br>二.obj=12<br>三.将参数类型的值传递给接受以类为参数的函数<br>四.返回值被声明为类时返回的却是参数类型</p>
-<p>#####2. 类转换为参数类型<br>原型:<code>operator double() const</code><br>注意:<br>一.必须是类方法<br>二.不能指定返回类型,double就是返回类型<br>三.不能有参数<br>四.使用explicit关键词可以避免隐式类型转换</p>
+<h5 id="2-类转换为参数类型"><a href="#2-类转换为参数类型" class="headerlink" title="2. 类转换为参数类型"></a>2. 类转换为参数类型</h5><p>原型:<code>operator double() const</code><br>注意:<br>一.必须是类方法<br>二.不能指定返回类型,double就是返回类型<br>三.不能有参数<br>四.使用explicit关键词可以避免隐式类型转换</p>
 <h4 id="复制构造函数"><a href="#复制构造函数" class="headerlink" title="* 复制构造函数"></a>* 复制构造函数</h4><p>原型:<code>class_name(const class_name&amp; )</code><br>使用一个对象来初始化另一个对象<br>何时被调用:在按值传递对象和返回对象时被调用<br>例子:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class_name A;</span><br><span class="line">class_name B(A);//1</span><br><span class="line">class_name B=A;//2等价于class_name B=class_name(A),调用的函数为class_name(const class_name &amp;)</span><br><span class="line">class_name B=class_name(A);//3</span><br><span class="line">class_name* B=new class_name(A);//4</span><br></pre></td></tr></table></figure>
 
